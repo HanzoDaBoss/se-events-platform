@@ -1,0 +1,42 @@
+module.exports = [
+  {
+    email: "janeisboring@company.com",
+    username: "jane500",
+    first_name: "Jane",
+    last_name: "Smith",
+    password: "securepassword123",
+    role: "staff",
+  },
+  {
+    email: "jon.jones@company.com",
+    username: "bonesjones",
+    first_name: "Jon",
+    last_name: "Jones",
+    password: "strongpassword456",
+    role: "staff",
+  },
+  {
+    email: "alex.volk@example.com",
+    username: "volk145",
+    first_name: "Alex",
+    last_name: "Volkanovski",
+    password: "mypassword789",
+    role: "user",
+  },
+  {
+    email: "mia.taylor@example.com",
+    username: "miataylor",
+    first_name: "Mia",
+    last_name: "Taylor",
+    password: "password321",
+    role: "user",
+  },
+  {
+    email: "sam.wilson@example.com",
+    username: "thefalcon",
+    first_name: "Sam",
+    last_name: "Wilson",
+    password: "anotherpassword654",
+    role: "user",
+  },
+];
