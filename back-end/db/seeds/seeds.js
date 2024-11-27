@@ -49,7 +49,7 @@ const seed = ({ eventsData, usersData }) => {
       return db.query(`
       CREATE TABLE users (
         id UUID PRIMARY KEY REFERENCES auth.users ON delete cascade,
-        email VARCHAR NOT NULL,
+        email VARCHAR NOT NULL UNIQUE,
         username VARCHAR NOT NULL,
         first_name VARCHAR NOT NULL,
         last_name VARCHAR NOT NULL,
@@ -90,7 +90,7 @@ const seed = ({ eventsData, usersData }) => {
         image_dir VARCHAR NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        creator_id UUID REFERENCES users(id)
+        created_by VARCHAR REFERENCES users(email)
       );
       `);
     })
@@ -124,7 +124,7 @@ const seed = ({ eventsData, usersData }) => {
     })
     .then(() => {
       const insertEventsQueryStr = format(
-        `INSERT INTO events (title, location, date, start_time, end_time, summary, description, image_dir, created_at, updated_at, creator_id) VALUES %L`,
+        `INSERT INTO events (title, location, date, start_time, end_time, summary, description, image_dir, created_at, updated_at, created_by) VALUES %L`,
         eventsData.map(
           ({
             title,
@@ -137,7 +137,7 @@ const seed = ({ eventsData, usersData }) => {
             image_dir,
             created_at,
             updated_at,
-            creator_id,
+            created_by,
           }) => [
             title,
             location,
@@ -149,7 +149,7 @@ const seed = ({ eventsData, usersData }) => {
             image_dir,
             created_at,
             updated_at,
-            creator_id,
+            created_by,
           ]
         )
       );
