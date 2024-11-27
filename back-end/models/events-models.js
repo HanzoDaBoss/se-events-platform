@@ -40,8 +40,6 @@ exports.insertEvent = ({
   end_time,
   summary,
   description,
-  created_at,
-  updated_at,
   created_by,
   image_dir,
 }) => {
@@ -69,7 +67,53 @@ exports.insertEvent = ({
   `,
       [...insertVals, image_dir]
     )
+    .then(({ rows }) => {
+      return rows[0];
+    });
+};
 
+exports.updateEventById = (
+  event_id,
+  {
+    title,
+    location,
+    date,
+    start_time,
+    end_time,
+    summary,
+    description,
+    created_at,
+    created_by,
+    image_dir,
+  }
+) => {
+  const updateVals = [
+    title,
+    location,
+    date,
+    start_time,
+    end_time,
+    summary,
+    description,
+    created_at,
+    created_by,
+    image_dir,
+    event_id,
+  ];
+  if (updateVals.includes(undefined)) {
+    return Promise.reject({ status: 400, msg: "Bad request" });
+  }
+
+  return db
+    .query(
+      `
+  UPDATE events 
+  SET title = $1, location = $2, date = $3, start_time = $4, end_time = $5, summary = $6, description = $7, created_at = $8, created_by = $9, image_dir = $10
+  WHERE id = $11
+  RETURNING *;
+  `,
+      updateVals
+    )
     .then(({ rows }) => {
       return rows[0];
     });

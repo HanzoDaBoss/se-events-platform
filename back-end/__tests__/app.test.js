@@ -54,8 +54,6 @@ describe("/api/events", () => {
         summary: "An elegant evening of celebration and networking.",
         description:
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
-        // created_at: "2024-11-25T12:00:00",
-        // updated_at: "2024-11-25T12:00:00",
         created_by: "hanif.uddz@gmail.com",
         image_dir: "images/events/winter_gala.jpg",
       })
@@ -93,8 +91,8 @@ describe("/api/events/:event_id", () => {
         expect(event.title).toBe("Tech Conference 2024");
         expect(event.location).toBe("San Francisco, CA");
         expect(event.date).toBe("2024-12-05T00:00:00.000Z");
-        expect(event.start_time).toBe("2025-12-05T09:00:00.000Z");
-        expect(event.end_time).toBe("2025-12-05T17:00:00.000Z");
+        expect(event.start_time).toBe("2024-12-05T09:00:00.000Z");
+        expect(event.end_time).toBe("2024-12-05T17:00:00.000Z");
         expect(event.summary).toBe(
           "A conference exploring the latest in technology."
         );
@@ -103,6 +101,44 @@ describe("/api/events/:event_id", () => {
         );
         expect(event.created_at).toBe("2024-11-25T10:30:00.000Z");
         expect(event.updated_at).toBe("2024-11-25T10:30:00.000Z");
+        expect(event.created_by).toBe("hanif.uddz@gmail.com");
+        expect(event.image_dir).toBe("images/events/tech_conference.jpg");
+      });
+  });
+  test("PATCH 200: Updates an event object and returns it", () => {
+    return request(app)
+      .patch("/api/events/1")
+      .send({
+        title: "Tech Conference 2024",
+        location: "San Francisco, CA",
+        date: "2024-12-05",
+        start_time: "2024-12-05T10:00:00",
+        end_time: "2024-12-05T15:00:00",
+        summary:
+          "A conference showcasing and exploring the latest in technology.",
+        description:
+          "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
+        created_at: "2024-11-25T10:30:00",
+        created_by: "hanif.uddz@gmail.com",
+        image_dir: "images/events/tech_conference.jpg",
+      })
+      .expect(200)
+      .then(({ body }) => {
+        const { event } = body;
+        expect(event.id).toBe(1);
+        expect(event.title).toBe("Tech Conference 2024");
+        expect(event.location).toBe("San Francisco, CA");
+        expect(event.date).toBe("2024-12-05T00:00:00.000Z");
+        expect(event.start_time).toBe("2024-12-05T10:00:00.000Z");
+        expect(event.end_time).toBe("2024-12-05T15:00:00.000Z");
+        expect(event.summary).toBe(
+          "A conference showcasing and exploring the latest in technology."
+        );
+        expect(event.description).toBe(
+          "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!"
+        );
+        expect(event.created_at).toBe("2024-11-25T10:30:00.000Z");
+        expect(typeof event.updated_at).toBe("string");
         expect(event.created_by).toBe("hanif.uddz@gmail.com");
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
       });

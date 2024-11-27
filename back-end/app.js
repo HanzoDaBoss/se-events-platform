@@ -3,6 +3,7 @@ const {
   getEvents,
   getEventById,
   postEvent,
+  patchEventById,
 } = require("./controllers/events-controllers");
 const { getHealthCheck } = require("./controllers/health-check-controllers");
 
@@ -16,6 +17,7 @@ app.get("/api/events", getEvents);
 app.post("/api/events", postEvent);
 
 app.get("/api/events/:event_id", getEventById);
+app.patch("/api/events/:event_id", patchEventById);
 
 app.use((error, request, response, next) => {
   if (error.status) {
