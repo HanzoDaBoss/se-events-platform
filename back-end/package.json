@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "jest": "^29.7.0",
-    "pg-format": "^1.0.4"
+    "pg-format": "^1.0.4",
+    "supertest": "^7.0.0"
   }
 }
