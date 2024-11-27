@@ -4,6 +4,7 @@ const {
   getEventById,
   postEvent,
   patchEventById,
+  deleteEventById,
 } = require("./controllers/events-controllers");
 const { getHealthCheck } = require("./controllers/health-check-controllers");
 
@@ -18,6 +19,7 @@ app.post("/api/events", postEvent);
 
 app.get("/api/events/:event_id", getEventById);
 app.patch("/api/events/:event_id", patchEventById);
+app.delete("/api/events/:event_id", deleteEventById);
 
 app.use((error, request, response, next) => {
   if (error.status) {

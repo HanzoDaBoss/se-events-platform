@@ -3,6 +3,7 @@ const {
   selectEventById,
   insertEvent,
   updateEventById,
+  removeEventById,
 } = require("../models/events-models");
 
 exports.getEvents = (request, response, next) => {
@@ -37,6 +38,15 @@ exports.patchEventById = (request, response, next) => {
   updateEventById(event_id, body)
     .then((event) => {
       response.status(200).send({ event });
+    })
+    .catch(next);
+};
+
+exports.deleteEventById = (request, response, next) => {
+  const { event_id } = request.params;
+  removeEventById(event_id)
+    .then(() => {
+      response.status(204).send();
     })
     .catch(next);
 };

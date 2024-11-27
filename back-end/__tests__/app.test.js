@@ -105,7 +105,7 @@ describe("/api/events/:event_id", () => {
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
       });
   });
-  test("PATCH 200: Updates an event object and returns it", () => {
+  test("PATCH 200: Updates an event object corresponding to the passed id and returns it", () => {
     return request(app)
       .patch("/api/events/1")
       .send({
@@ -142,5 +142,8 @@ describe("/api/events/:event_id", () => {
         expect(event.created_by).toBe("hanif.uddz@gmail.com");
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
       });
+  });
+  test("DELETE 204: Deletes an event object corresponding to the passed id", () => {
+    return request(app).delete("/api/events/6").expect(204);
   });
 });

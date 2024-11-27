@@ -118,3 +118,13 @@ exports.updateEventById = (
       return rows[0];
     });
 };
+
+exports.removeEventById = (event_id) => {
+  return db.query(
+    `
+    DELETE FROM events
+    WHERE id = $1;
+    `,
+    [event_id]
+  );
+};
