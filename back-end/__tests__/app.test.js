@@ -54,8 +54,8 @@ describe("/api/events", () => {
         summary: "An elegant evening of celebration and networking.",
         description:
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
-        created_at: "2024-11-25T12:00:00",
-        updated_at: "2024-11-25T12:00:00",
+        // created_at: "2024-11-25T12:00:00",
+        // updated_at: "2024-11-25T12:00:00",
         created_by: "hanif.uddz@gmail.com",
         image_dir: "images/events/winter_gala.jpg",
       })
@@ -74,8 +74,8 @@ describe("/api/events", () => {
         expect(event.description).toBe(
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!"
         );
-        expect(event.created_at).toBe("2024-11-25T12:00:00.000Z");
-        expect(event.updated_at).toBe("2024-11-25T12:00:00.000Z");
+        expect(typeof event.created_at).toBe("string");
+        expect(typeof event.updated_at).toBe("string");
         expect(event.created_by).toBe("hanif.uddz@gmail.com");
         expect(event.image_dir).toBe("images/events/winter_gala.jpg");
       });

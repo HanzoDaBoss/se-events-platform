@@ -53,8 +53,6 @@ exports.insertEvent = ({
     end_time,
     summary,
     description,
-    created_at,
-    updated_at,
     created_by,
   ];
   if (insertVals.includes(undefined)) {
@@ -64,9 +62,9 @@ exports.insertEvent = ({
   return db
     .query(
       `
-  INSERT INTO events (title, location, date, start_time, end_time, summary, description, created_at, updated_at, created_by, image_dir)
+  INSERT INTO events (title, location, date, start_time, end_time, summary, description, created_by, image_dir)
   VALUES
-  ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, COALESCE($11, 'images/events/placeholder.jpg'))
+  ($1, $2, $3, $4, $5, $6, $7, $8, COALESCE($9, 'images/events/placeholder.jpg'))
   RETURNING *;
   `,
       [...insertVals, image_dir]
