@@ -3,8 +3,8 @@ module.exports = [
     title: "Tech Conference 2024",
     location: "San Francisco, CA",
     date: "2024-12-05",
-    start_time: "2025-02-14T09:00:00.000Z",
-    end_time: "2025-02-14T17:00:00.000Z",
+    start_time: "2025-12-05T09:00:00.000Z",
+    end_time: "2025-12-05T17:00:00.000Z",
     summary: "A conference exploring the latest in technology.",
     description:
       "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology.",
@@ -17,8 +17,8 @@ module.exports = [
     title: "Art in the Park",
     location: "Central Park, NY",
     date: "2024-11-30",
-    start_time: "2025-03-10T12:00:00.000Z",
-    end_time: "2025-03-10T16:00:00.000Z",
+    start_time: "2025-11-30T12:00:00.000Z",
+    end_time: "2025-11-30T16:00:00.000Z",
     summary: "An afternoon of art and creativity.",
     description:
       "Experience the beauty of art in the heart of the city with exhibitions, workshops, and live performances.",
