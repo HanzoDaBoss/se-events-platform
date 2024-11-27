@@ -85,10 +85,10 @@ const seed = ({ eventsData, usersData }) => {
         end_time TIMESTAMP NOT NULL,
         summary TEXT NOT NULL,
         description TEXT NOT NULL,
-        image_dir VARCHAR NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        created_by VARCHAR REFERENCES users(email)
+        created_by VARCHAR REFERENCES users(email),
+        image_dir VARCHAR NOT NULL
       );
       `);
     })
@@ -122,7 +122,7 @@ const seed = ({ eventsData, usersData }) => {
     })
     .then(() => {
       const insertEventsQueryStr = format(
-        `INSERT INTO events (title, location, date, start_time, end_time, summary, description, image_dir, created_at, updated_at, created_by) VALUES %L`,
+        `INSERT INTO events (title, location, date, start_time, end_time, summary, description, created_at, updated_at, created_by, image_dir) VALUES %L`,
         eventsData.map(
           ({
             title,
@@ -132,10 +132,10 @@ const seed = ({ eventsData, usersData }) => {
             end_time,
             summary,
             description,
-            image_dir,
             created_at,
             updated_at,
             created_by,
+            image_dir,
           }) => [
             title,
             location,
@@ -144,10 +144,10 @@ const seed = ({ eventsData, usersData }) => {
             end_time,
             summary,
             description,
-            image_dir,
             created_at,
             updated_at,
             created_by,
+            image_dir,
           ]
         )
       );
