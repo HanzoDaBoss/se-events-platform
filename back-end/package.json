@@ -6,7 +6,7 @@
   "scripts": {
     "setup-dbs": "psql -f ./db/setup.sql",
     "seed": "node ./db/seeds/run-seeds.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node listen.js",
     "seed-prod": "NODE_ENV=production npm run seed"
   },
@@ -20,6 +20,7 @@
     "pg": "^8.13.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "pg-format": "^1.0.4"
   }
 }
