@@ -6,6 +6,17 @@ require("dotenv").config({
   path: `${__dirname}/../../.env.supabase`,
 });
 
+const supabaseAdmin = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SERVICE_ROLE_KEY,
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  }
+);
+
 const seed = ({ eventsData, usersData }) => {
   return db
     .query(`DROP TRIGGER IF EXISTS on_new_user ON auth.users;`)
@@ -20,6 +31,19 @@ const seed = ({ eventsData, usersData }) => {
     })
     .then(() => {
       return db.query(`DROP TABLE IF EXISTS users;`);
+    })
+    .then(() => {
+      supabaseAdmin.auth.admin
+        .listUsers()
+        .then(({ data }) => {
+          return data.users.map((user) => user.id);
+        })
+        .then((user_ids) => {
+          const deleteUsersPromises = user_ids.map((user_id) => {
+            return supabaseAdmin.auth.admin.deleteUser(user_id);
+          });
+          return Promise.all(deleteUsersPromises);
+        });
     })
     .then(() => {
       return db.query(`
@@ -82,16 +106,6 @@ const seed = ({ eventsData, usersData }) => {
       `);
     })
     .then(() => {
-      const supabaseAdmin = createClient(
-        process.env.SUPABASE_URL,
-        process.env.SERVICE_ROLE_KEY,
-        {
-          auth: {
-            autoRefreshToken: false,
-            persistSession: false,
-          },
-        }
-      );
       const createUsersPromises = usersData.map((user) => {
         return supabaseAdmin.auth.admin.createUser({
           email: user.email,
