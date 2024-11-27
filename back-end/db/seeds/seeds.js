@@ -33,17 +33,15 @@ const seed = ({ eventsData, usersData }) => {
       return db.query(`DROP TABLE IF EXISTS users;`);
     })
     .then(() => {
-      supabaseAdmin.auth.admin
-        .listUsers()
-        .then(({ data }) => {
-          return data.users.map((user) => user.id);
-        })
-        .then((user_ids) => {
-          const deleteUsersPromises = user_ids.map((user_id) => {
-            return supabaseAdmin.auth.admin.deleteUser(user_id);
-          });
-          return Promise.all(deleteUsersPromises);
-        });
+      return supabaseAdmin.auth.admin.listUsers();
+    })
+    .then(({ data }) => {
+      const user_ids = data.users.map((user) => user.id);
+
+      const deleteUsersPromises = user_ids.map((user_id) => {
+        return supabaseAdmin.auth.admin.deleteUser(user_id);
+      });
+      return Promise.all(deleteUsersPromises);
     })
     .then(() => {
       return db.query(`
