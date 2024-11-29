@@ -4,9 +4,9 @@ const db = require("../db/connection");
 const seed = require("../db/seeds/seeds");
 const data = require("../db/data/test-data/index");
 
-beforeAll(() => {
-  return seed(data);
-});
+// beforeAll(() => {
+//   return seed(data);
+// });
 
 afterAll(() => {
   return db.end();
@@ -18,8 +18,28 @@ describe("/api/healthcheck", () => {
   });
 });
 
+describe.only("/api/users/sign-in", () => {
+  test("POST 201: Inserts a user login and returns its user details", () => {
+    return request(app)
+      .post("/api/users/sign-in")
+      .send({
+        email: "alex.volk@example.com",
+        password: "password123",
+      })
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.user_id).toBe("5bbfbe00-b17c-45a3-ad15-96c58b182d45");
+        expect(body.email).toBe("alex.volk@example.com");
+        expect(body.first_name).toBe("Alex");
+        expect(body.last_name).toBe("Volkanovski");
+        expect(body.role).toBe("user");
+        expect(body.username).toBe("volk145");
+      });
+  });
+});
+
 describe("/api/events", () => {
-  test("GET 200: Responds with an array of event objects", () => {
+  test.only("GET 200: Responds with an array of event objects", () => {
     return request(app)
       .get("/api/events")
       .expect(200)

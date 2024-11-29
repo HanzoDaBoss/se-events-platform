@@ -6,10 +6,48 @@ const {
   removeEventById,
 } = require("../models/events-models");
 
+const supabaseUser = require("../db/supabase-connection");
+
+const authoriseUser = (request, response) => {
+  const { accessToken } = request.cookies;
+  const refresh_token = request.cookies.refreshToken;
+
+  return supabaseUser.auth.getUser(accessToken).then(({ data, error }) => {
+    if (error) {
+      return supabaseUser.auth
+        .refreshSession({ refresh_token })
+        .then(({ data, error }) => {
+          if (error) {
+            return Promise.reject({
+              status: error.status,
+              msg: "Unauthorised user",
+            });
+          }
+          const newAccessToken = data.session.access_token;
+          const newRefreshToken = data.session.refresh_token;
+          response.cookie("accessToken", newAccessToken, {
+            secure: true,
+            httpOnly: true,
+            maxAge: 60 * 60 * 1000, // Set the expiration time (1 hour in this example)
+          });
+          response.cookie("refreshToken", newRefreshToken, {
+            secure: true,
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000, // Set the expiration time (7 days in this example)
+          });
+          return data;
+        });
+    }
+    return data;
+  });
+};
+
 exports.getEvents = (request, response, next) => {
-  selectEvents()
-    .then((events) => {
-      response.status(200).send({ events });
+  authoriseUser(request, response)
+    .then((data) => {
+      selectEvents().then((events) => {
+        response.status(200).send({ events });
+      });
     })
     .catch(next);
 };
