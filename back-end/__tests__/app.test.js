@@ -190,3 +190,17 @@ describe("/api/events/:event_id", () => {
     return request(app).delete("/api/events/6").expect(204);
   });
 });
+
+describe("/api/users-events/:event_id", () => {
+  test("POST 201: Inserts an user-event object into users-events and returns it", () => {
+    return request(app)
+      .post("/api/users-events/2")
+      .expect(201)
+      .then(({ body }) => {
+        const { userEvent } = body;
+        expect(typeof userEvent.id).toBe("number");
+        expect(typeof userEvent.user_id).toBe("string");
+        expect(userEvent.event_id).toBe(2);
+      });
+  });
+});

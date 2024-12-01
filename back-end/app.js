@@ -11,6 +11,9 @@ const {
 } = require("./controllers/events-controllers");
 const { getHealthCheck } = require("./controllers/health-check-controllers");
 const { postLogin, postRegister } = require("./controllers/users-controllers");
+const {
+  postUserEventByEventId,
+} = require("./controllers/users-events-controllers");
 
 const app = express();
 
@@ -30,7 +33,7 @@ app.post("/api/users/login", postLogin);
 
 app.post("/api/users/register", postRegister);
 
-// app.post("/api/users-events/:event_id", postUserEventByEventId);
+app.post("/api/users-events/:event_id", postUserEventByEventId);
 
 app.use((error, request, response, next) => {
   if (error.status) {
