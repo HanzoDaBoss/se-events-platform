@@ -100,6 +100,7 @@ exports.insertEvent = (
 };
 
 exports.updateEventById = (
+  userData,
   event_id,
   {
     title,
@@ -114,6 +115,10 @@ exports.updateEventById = (
     image_dir,
   }
 ) => {
+  const userRole = userData.user.user_metadata.role;
+  if (userRole !== "staff") {
+    return Promise.reject({ status: 403, msg: "Unauthorised access" });
+  }
   const updateVals = [
     title,
     location,

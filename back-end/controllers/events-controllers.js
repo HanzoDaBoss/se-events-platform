@@ -77,9 +77,13 @@ exports.postEvent = (request, response, next) => {
 exports.patchEventById = (request, response, next) => {
   const { event_id } = request.params;
   const { body } = request;
-  updateEventById(event_id, body)
-    .then((event) => {
-      response.status(200).send({ event });
+  authoriseUser(request, response)
+    .then((userData) => {
+      updateEventById(userData, event_id, body)
+        .then((event) => {
+          response.status(200).send({ event });
+        })
+        .catch(next);
     })
     .catch(next);
 };

@@ -61,7 +61,7 @@ describe.only("/api/users/login", () => {
 });
 
 describe("/api/events", () => {
-  test.only("GET 200: Responds with an array of event objects", () => {
+  test("GET 200: Responds with an array of event objects", () => {
     return request(app)
       .get("/api/events")
       .expect(200)
@@ -85,7 +85,7 @@ describe("/api/events", () => {
         });
       });
   });
-  test.only("POST 201: Inserts an event object into events and returns it", () => {
+  test("POST 201: Inserts an event object into events and returns it", () => {
     return request(app)
       .post("/api/events")
       .send({
@@ -123,7 +123,7 @@ describe("/api/events", () => {
   });
 });
 
-describe("/api/events/:event_id", () => {
+describe.only("/api/events/:event_id", () => {
   test("GET 200: Responds with an event object corresponding to the passed id", () => {
     return request(app)
       .get("/api/events/1")
