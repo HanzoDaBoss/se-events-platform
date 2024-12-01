@@ -1,7 +1,7 @@
 const db = require("../db/connection");
 
-exports.selectEvents = (data) => {
-  const userId = data.user.id || "00000000-0000-0000-0000-000000000000";
+exports.selectEvents = (userData) => {
+  const userId = userData.user.id || "00000000-0000-0000-0000-000000000000";
   return db
     .query(
       `
@@ -52,17 +52,24 @@ exports.selectEventById = (event_id) => {
     });
 };
 
-exports.insertEvent = ({
-  title,
-  location,
-  date,
-  start_time,
-  end_time,
-  summary,
-  description,
-  created_by,
-  image_dir,
-}) => {
+exports.insertEvent = (
+  userData,
+  {
+    title,
+    location,
+    date,
+    start_time,
+    end_time,
+    summary,
+    description,
+    created_by,
+    image_dir,
+  }
+) => {
+  const userRole = userData.user.user_metadata.role;
+  if (userRole !== "staff") {
+    return Promise.reject({ status: 403, msg: "Unauthorised access" });
+  }
   const insertVals = [
     title,
     location,

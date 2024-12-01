@@ -44,8 +44,8 @@ const authoriseUser = (request, response) => {
 
 exports.getEvents = (request, response, next) => {
   authoriseUser(request, response)
-    .then((data) => {
-      selectEvents(data).then((events) => {
+    .then((userData) => {
+      selectEvents(userData).then((events) => {
         response.status(200).send({ events });
       });
     })
@@ -63,9 +63,13 @@ exports.getEventById = (request, response, next) => {
 
 exports.postEvent = (request, response, next) => {
   const { body } = request;
-  insertEvent(body)
-    .then((event) => {
-      response.status(201).send({ event });
+  authoriseUser(request, response)
+    .then((userData) => {
+      insertEvent(userData, body)
+        .then((event) => {
+          response.status(201).send({ event });
+        })
+        .catch(next);
     })
     .catch(next);
 };

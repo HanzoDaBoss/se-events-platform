@@ -54,7 +54,7 @@ describe.only("/api/users/login", () => {
         expect(body.email).toBe("alex.volk@example.com");
         expect(body.first_name).toBe("Alex");
         expect(body.last_name).toBe("Volkanovski");
-        expect(body.role).toBe("user");
+        expect(body.role).toBe("staff");
         expect(body.username).toBe("volk145");
       });
   });
@@ -85,7 +85,7 @@ describe("/api/events", () => {
         });
       });
   });
-  test("POST 201: Inserts an event object into events and returns it", () => {
+  test.only("POST 201: Inserts an event object into events and returns it", () => {
     return request(app)
       .post("/api/events")
       .send({

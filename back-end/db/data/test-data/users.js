@@ -11,6 +11,6 @@ module.exports = [
     username: "volk145",
     first_name: "Alex",
     last_name: "Volkanovski",
-    role: "user",
+    role: "staff",
   },
 ];
