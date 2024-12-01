@@ -10,7 +10,7 @@ const {
   deleteEventById,
 } = require("./controllers/events-controllers");
 const { getHealthCheck } = require("./controllers/health-check-controllers");
-const { postSignIn } = require("./controllers/users-controllers");
+const { postLogin, postRegister } = require("./controllers/users-controllers");
 
 const app = express();
 
@@ -26,7 +26,9 @@ app.get("/api/events/:event_id", getEventById);
 app.patch("/api/events/:event_id", patchEventById);
 app.delete("/api/events/:event_id", deleteEventById);
 
-app.post("/api/users/sign-in", postSignIn);
+app.post("/api/users/login", postLogin);
+
+app.post("/api/users/register", postRegister);
 
 app.use((error, request, response, next) => {
   if (error.status) {

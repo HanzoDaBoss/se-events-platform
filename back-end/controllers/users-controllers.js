@@ -1,8 +1,8 @@
-const { signInUser } = require("../models/users-models");
+const { loginUser, registerUser } = require("../models/users-models");
 
-exports.postSignIn = (request, response, next) => {
+exports.postLogin = (request, response, next) => {
   const { body } = request;
-  signInUser(body)
+  loginUser(body)
     .then((user) => {
       const accessToken = user.session.access_token;
       const refreshToken = user.session.refresh_token;
@@ -19,6 +19,15 @@ exports.postSignIn = (request, response, next) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // Set the expiration time (7 days)
       });
       response.status(201).send({ user_id, ...user_data });
+    })
+    .catch(next);
+};
+
+exports.postRegister = (request, response, next) => {
+  const { body } = request;
+  registerUser(body)
+    .then((user) => {
+      response.status(201).send(user.user.user_metadata);
     })
     .catch(next);
 };

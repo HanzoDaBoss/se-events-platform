@@ -71,7 +71,7 @@ const seed = ({ eventsData, usersData }) => {
       return db.query(`
         CREATE TRIGGER on_new_user
         AFTER INSERT ON auth.users FOR each row
-        EXECUTE PROCEDURE public.handle_new_user ();
+        EXECUTE PROCEDURE public.handle_new_user();
       `);
     })
     .then(() => {

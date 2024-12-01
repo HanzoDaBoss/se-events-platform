@@ -6,7 +6,7 @@ const {
   removeEventById,
 } = require("../models/events-models");
 
-const supabaseUser = require("../db/supabase-connection");
+const { supabaseUser } = require("../db/supabase-connection");
 
 const authoriseUser = (request, response) => {
   const { accessToken } = request.cookies;
