@@ -1,21 +1,10 @@
 const format = require("pg-format");
 const db = require("../connection");
-const { createClient } = require("@supabase/supabase-js");
+const { supabaseAdmin } = require("../supabase-connection");
 
 require("dotenv").config({
   path: `${__dirname}/../../.env.supabase`,
 });
-
-const supabaseAdmin = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SERVICE_ROLE_KEY,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  }
-);
 
 const seed = ({ eventsData, usersData }) => {
   return db
