@@ -1,11 +1,31 @@
 const db = require("../db/connection");
 
-exports.selectEvents = () => {
+exports.selectEvents = (data) => {
+  const userId = data.user.id || "00000000-0000-0000-0000-000000000000";
   return db
     .query(
       `
-    SELECT * FROM events;
-    `
+    SELECT 
+      events.id,
+      events.title,
+      events.location,
+      events.date,
+      events.start_time,
+      events.end_time,
+      events.summary,
+      events.description,
+      events.created_at,
+      events.updated_at,
+      events.created_by,
+      events.image_dir,
+        EXISTS (
+          SELECT 1
+          FROM users_events ue
+          WHERE ue.event_id = events.id AND ue.user_id = $1
+        ) AS is_attending
+    FROM events;
+    `,
+      [userId]
     )
     .then(({ rows }) => {
       return rows;

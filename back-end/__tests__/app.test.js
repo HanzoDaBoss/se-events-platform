@@ -18,7 +18,7 @@ describe("/api/healthcheck", () => {
   });
 });
 
-describe.only("/api/users/register", () => {
+describe("/api/users/register", () => {
   test("POST 201: Inserts a user's registration and returns its register details", () => {
     return request(app)
       .post("/api/users/register")
@@ -81,6 +81,7 @@ describe("/api/events", () => {
           expect(typeof event.updated_at).toBe("string");
           expect(typeof event.created_by).toBe("string");
           expect(typeof event.image_dir).toBe("string");
+          expect(typeof event.is_attending).toBe("boolean");
         });
       });
   });

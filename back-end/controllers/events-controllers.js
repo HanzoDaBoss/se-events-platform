@@ -45,7 +45,7 @@ const authoriseUser = (request, response) => {
 exports.getEvents = (request, response, next) => {
   authoriseUser(request, response)
     .then((data) => {
-      selectEvents().then((events) => {
+      selectEvents(data).then((events) => {
         response.status(200).send({ events });
       });
     })
