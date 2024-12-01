@@ -30,6 +30,8 @@ app.post("/api/users/login", postLogin);
 
 app.post("/api/users/register", postRegister);
 
+// app.post("/api/users-events/:event_id", postUserEventByEventId);
+
 app.use((error, request, response, next) => {
   if (error.status) {
     response.status(error.status).send({ msg: error.msg });

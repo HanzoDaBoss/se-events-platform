@@ -40,7 +40,7 @@ describe("/api/users/register", () => {
   });
 });
 
-describe.only("/api/users/login", () => {
+describe("/api/users/login", () => {
   test("POST 201: Inserts a user login and returns its user details", () => {
     return request(app)
       .post("/api/users/login")
@@ -123,7 +123,7 @@ describe("/api/events", () => {
   });
 });
 
-describe.only("/api/events/:event_id", () => {
+describe("/api/events/:event_id", () => {
   test("GET 200: Responds with an event object corresponding to the passed id", () => {
     return request(app)
       .get("/api/events/1")
