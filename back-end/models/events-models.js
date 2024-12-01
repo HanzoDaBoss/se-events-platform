@@ -151,7 +151,11 @@ exports.updateEventById = (
     });
 };
 
-exports.removeEventById = (event_id) => {
+exports.removeEventById = (userData, event_id) => {
+  const userRole = userData.user.user_metadata.role;
+  if (userRole !== "staff") {
+    return Promise.reject({ status: 403, msg: "Unauthorised access" });
+  }
   return db.query(
     `
     DELETE FROM events

@@ -90,9 +90,13 @@ exports.patchEventById = (request, response, next) => {
 
 exports.deleteEventById = (request, response, next) => {
   const { event_id } = request.params;
-  removeEventById(event_id)
-    .then(() => {
-      response.status(204).send();
+  authoriseUser(request, response)
+    .then((userData) => {
+      removeEventById(userData, event_id)
+        .then(() => {
+          response.status(204).send();
+        })
+        .catch(next);
     })
     .catch(next);
 };
