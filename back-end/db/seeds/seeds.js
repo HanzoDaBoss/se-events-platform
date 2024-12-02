@@ -68,7 +68,7 @@ const seed = ({ eventsData, usersData }) => {
       CREATE TABLE events (
         id SERIAL PRIMARY KEY,
         title VARCHAR(100) NOT NULL,
-        location VARCHAR(255),
+        location VARCHAR(255) NOT NULL,
         date DATE NOT NULL,
         start_time TIMESTAMP NOT NULL,
         end_time TIMESTAMP NOT NULL,

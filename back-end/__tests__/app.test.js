@@ -121,6 +121,42 @@ describe("/api/events", () => {
         expect(event.image_dir).toBe("images/events/winter_gala.jpg");
       });
   });
+  test("POST 400: Returns with error if passed event object is missing required fields", () => {
+    return request(app)
+      .post("/api/events")
+      .send({
+        date: "2024-12-15",
+        start_time: "2024-12-15T19:00:00",
+        summary: "An elegant evening of celebration and networking.",
+        description:
+          "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
+        image_dir: "images/events/winter_gala.jpg",
+      })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
+  });
+  test("POST 404: Returns with error if passed event object has a created_by that is not present in users", () => {
+    return request(app)
+      .post("/api/events")
+      .send({
+        title: "Winter Gala 2024",
+        location: "Denver, CO",
+        date: "2024-12-15",
+        start_time: "2024-12-15T19:00:00",
+        end_time: "2024-12-15T23:00:00",
+        summary: "An elegant evening of celebration and networking.",
+        description:
+          "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
+        created_by: "notindb@gmail.com",
+        image_dir: "images/events/winter_gala.jpg",
+      })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Not found");
+      });
+  });
 });
 
 describe("/api/events/:event_id", () => {
