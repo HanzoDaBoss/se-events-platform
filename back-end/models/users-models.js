@@ -41,3 +41,11 @@ exports.registerUser = ({
       return data;
     });
 };
+
+exports.logoutUser = (JWT) => {
+  return supabaseUser.auth.signOut({ JWT }).then(({ data, error }) => {
+    if (error) {
+      return Promise.reject({ status: error.status, msg: error.code });
+    }
+  });
+};

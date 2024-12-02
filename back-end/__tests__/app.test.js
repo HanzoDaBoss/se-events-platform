@@ -208,3 +208,9 @@ describe("/api/users-events/:event_id", () => {
     return request(app).delete("/api/users-events/2").expect(204);
   });
 });
+
+describe("/api/users/logout", () => {
+  test("POST 204: Deletes a user's login session", () => {
+    return request(app).delete("/api/users/logout").expect(204);
+  });
+});

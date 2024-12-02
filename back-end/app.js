@@ -10,7 +10,11 @@ const {
   deleteEventById,
 } = require("./controllers/events-controllers");
 const { getHealthCheck } = require("./controllers/health-check-controllers");
-const { postLogin, postRegister } = require("./controllers/users-controllers");
+const {
+  postLogin,
+  postRegister,
+  deleteLogout,
+} = require("./controllers/users-controllers");
 const {
   postUserEventByEventId,
   deleteUserEventByEventId,
@@ -33,6 +37,8 @@ app.delete("/api/events/:event_id", deleteEventById);
 app.post("/api/users/login", postLogin);
 
 app.post("/api/users/register", postRegister);
+
+app.delete("/api/users/logout", deleteLogout);
 
 app.post("/api/users-events/:event_id", postUserEventByEventId);
 app.delete("/api/users-events/:event_id", deleteUserEventByEventId);

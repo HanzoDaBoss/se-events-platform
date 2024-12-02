@@ -1,4 +1,8 @@
-const { loginUser, registerUser } = require("../models/users-models");
+const {
+  loginUser,
+  registerUser,
+  logoutUser,
+} = require("../models/users-models");
 
 exports.postLogin = (request, response, next) => {
   const { body } = request;
@@ -28,6 +32,16 @@ exports.postRegister = (request, response, next) => {
   registerUser(body)
     .then((user) => {
       response.status(201).send(user.user.user_metadata);
+    })
+    .catch(next);
+};
+
+exports.deleteLogout = (request, response, next) => {
+  const { accessToken } = request.cookies;
+  logoutUser(accessToken)
+    .then(() => {
+      response.clearCookie("accessToken");
+      response.status(204).send();
     })
     .catch(next);
 };
