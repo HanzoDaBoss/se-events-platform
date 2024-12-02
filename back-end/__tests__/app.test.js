@@ -149,6 +149,23 @@ describe("/api/events/:event_id", () => {
         expect(typeof event.is_attending).toBe("boolean");
       });
   });
+  test("GET 404: Returns error if event id is not found in database", () => {
+    return request(app)
+      .get("/api/events/1234567")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Event not found");
+      });
+  });
+  test("GET 400: Returns error if event id is invalid", () => {
+    return request(app)
+      .get("/api/events/invalidID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
+  });
+
   test("PATCH 200: Updates an event object corresponding to the passed id and returns it", () => {
     return request(app)
       .patch("/api/events/1")

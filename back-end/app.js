@@ -43,6 +43,10 @@ app.delete("/api/users/logout", deleteLogout);
 app.post("/api/users-events/:event_id", postUserEventByEventId);
 app.delete("/api/users-events/:event_id", deleteUserEventByEventId);
 
+app.get("*", (request, response, next) => {
+  response.status(404).send({ msg: "Not found" });
+});
+
 app.use((error, request, response, next) => {
   if (error.status) {
     response.status(error.status).send({ msg: error.msg });
