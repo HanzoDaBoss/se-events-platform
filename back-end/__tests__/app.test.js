@@ -192,7 +192,7 @@ describe("/api/events/:event_id", () => {
 });
 
 describe("/api/users-events/:event_id", () => {
-  test("POST 201: Inserts an user-event object into users-events and returns it", () => {
+  test("POST 201: Inserts an user-event object into users-events corresponding to the event id and returns it", () => {
     return request(app)
       .post("/api/users-events/2")
       .expect(201)
@@ -202,5 +202,8 @@ describe("/api/users-events/:event_id", () => {
         expect(typeof userEvent.user_id).toBe("string");
         expect(userEvent.event_id).toBe(2);
       });
+  });
+  test("DELETE 204: Deletes an user-event object corresponding to the passed id", () => {
+    return request(app).delete("/api/users-events/2").expect(204);
   });
 });
