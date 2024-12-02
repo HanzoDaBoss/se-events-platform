@@ -32,14 +32,33 @@ exports.selectEvents = (userData) => {
     });
 };
 
-exports.selectEventById = (event_id) => {
+exports.selectEventById = (userData, event_id) => {
+  const userId = userData.user.id || "00000000-0000-0000-0000-000000000000";
   return db
     .query(
       `
-    SELECT * FROM events
-    WHERE events.id = $1;
+    SELECT 
+      events.id,
+      events.title,
+      events.location,
+      events.date,
+      events.start_time,
+      events.end_time,
+      events.summary,
+      events.description,
+      events.created_at,
+      events.updated_at,
+      events.created_by,
+      events.image_dir,
+        EXISTS (
+          SELECT 1
+          FROM users_events ue
+          WHERE ue.event_id = events.id AND ue.user_id = $1
+        ) AS is_attending
+    FROM events
+    WHERE events.id = $2;
     `,
-      [event_id]
+      [userId, event_id]
     )
     .then(({ rows }) => {
       if (rows.length === 0) {

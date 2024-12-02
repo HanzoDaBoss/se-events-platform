@@ -19,9 +19,11 @@ exports.getEvents = (request, response, next) => {
 
 exports.getEventById = (request, response, next) => {
   const { event_id } = request.params;
-  selectEventById(event_id)
-    .then((event) => {
-      response.status(200).send({ event });
+  authoriseUser(request, response)
+    .then((userData) => {
+      selectEventById(userData, event_id).then((event) => {
+        response.status(200).send({ event });
+      });
     })
     .catch(next);
 };

@@ -146,6 +146,7 @@ describe("/api/events/:event_id", () => {
         expect(event.updated_at).toBe("2024-11-25T10:30:00.000Z");
         expect(event.created_by).toBe("hanif.uddz@gmail.com");
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
+        expect(typeof event.is_attending).toBe("boolean");
       });
   });
   test("PATCH 200: Updates an event object corresponding to the passed id and returns it", () => {
