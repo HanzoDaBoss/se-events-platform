@@ -361,7 +361,7 @@ describe("/api/users-events/:event_id", () => {
   test("DELETE 204: Deletes an user-event object corresponding to the passed id", () => {
     return request(app).delete("/api/users-events/2").expect(204);
   });
-  test("POST 404: Returns with error if event id is not found in database", () => {
+  test("DELETE 404: Returns with error if event id is not found in database", () => {
     return request(app)
       .delete("/api/users-events/100")
       .expect(404)
@@ -369,7 +369,7 @@ describe("/api/users-events/:event_id", () => {
         expect(body.msg).toBe("Event not found");
       });
   });
-  test("POST 400: Returns error if event id is invalid", () => {
+  test("DELETE 400: Returns error if event id is invalid", () => {
     return request(app)
       .delete("/api/users-events/invalidID")
       .expect(400)

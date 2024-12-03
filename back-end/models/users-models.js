@@ -8,7 +8,10 @@ exports.loginUser = ({ email, password }) => {
     })
     .then(({ data, error }) => {
       if (error) {
-        return Promise.reject({ status: error.status, msg: error.code });
+        return Promise.reject({
+          status: error.status,
+          msg: "Invalid credentials",
+        });
       }
       return data;
     });
@@ -36,7 +39,7 @@ exports.registerUser = ({
     })
     .then(({ data, error }) => {
       if (error) {
-        return Promise.reject({ status: error.status, msg: error.code });
+        return Promise.reject({ status: 400, msg: "Bad request" });
       }
       return data;
     });
