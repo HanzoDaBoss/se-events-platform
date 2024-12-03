@@ -8,9 +8,10 @@ const {
 const { authoriseUser } = require("../utils/authoriseUser");
 
 exports.getEvents = (request, response, next) => {
+  const { is_attending, sort_by, order } = request.query;
   authoriseUser(request, response)
     .then((userData) => {
-      selectEvents(userData).then((events) => {
+      selectEvents(userData, is_attending, sort_by, order).then((events) => {
         response.status(200).send({ events });
       });
     })

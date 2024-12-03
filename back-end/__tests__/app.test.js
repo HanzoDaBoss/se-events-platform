@@ -46,7 +46,7 @@ describe("/api/users/register", () => {
 });
 
 describe("/api/users/login", () => {
-  test("POST 201: Inserts a user login and returns its user details", () => {
+  test.only("POST 201: Inserts a user login and returns its user details", () => {
     return request(app)
       .post("/api/users/login")
       .send({
@@ -66,7 +66,7 @@ describe("/api/users/login", () => {
 });
 
 describe("/api/events", () => {
-  test("GET 200: Responds with an array of event objects", () => {
+  test.only("GET 200: Responds with an array of event objects", () => {
     return request(app)
       .get("/api/events")
       .expect(200)

@@ -1,11 +1,24 @@
 const db = require("../db/connection");
 
-exports.selectEvents = (userData) => {
+exports.selectEvents = (
+  userData,
+  isAttending,
+  sortBy = "default",
+  order = "ASC"
+) => {
   const userId = userData.user.id || "00000000-0000-0000-0000-000000000000";
-  return db
-    .query(
-      `
-    SELECT 
+
+  if (!["default", "start_time"].includes(sortBy)) {
+    return Promise.reject({ status: 400, msg: "Invalid sort query" });
+  }
+  const orderBy = order.toUpperCase();
+  if (!["DESC", "ASC"].includes(orderBy)) {
+    return Promise.reject({ status: 400, msg: "Invalid order query" });
+  }
+
+  const queryVals = [userId];
+  let sqlQueryString = `
+  SELECT 
       events.id,
       events.title,
       events.location,
@@ -23,13 +36,31 @@ exports.selectEvents = (userData) => {
           FROM users_events ue
           WHERE ue.event_id = events.id AND ue.user_id = $1
         ) AS is_attending
-    FROM events;
-    `,
-      [userId]
-    )
-    .then(({ rows }) => {
-      return rows;
-    });
+    FROM events
+  `;
+
+  if (isAttending) {
+    sqlQueryString += `
+    WHERE
+    EXISTS (
+      SELECT 1
+      FROM users_events ue
+      WHERE ue.event_id = events.id AND ue.user_id = $1
+    ) `;
+  }
+
+  if (sortBy === "start_time") {
+    sqlQueryString += `
+    ORDER BY ${sortBy} ${orderBy};
+    `;
+  }
+
+  return db.query(sqlQueryString, queryVals).then(({ rows }) => {
+    if (rows.length === 0) {
+      return Promise.reject({ status: 404, msg: "Not found" });
+    }
+    return rows;
+  });
 };
 
 exports.selectEventById = (userData, event_id) => {
