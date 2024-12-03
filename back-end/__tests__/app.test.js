@@ -12,17 +12,6 @@ afterAll(() => {
   return db.end();
 });
 
-describe("/api/healthcheck", () => {
-  test("GET 200", () => {
-    return request(app)
-      .get("/api/healthcheck")
-      .expect(200)
-      .then(({ text }) => {
-        expect(text).toBe("App is running");
-      });
-  });
-});
-
 describe("/api/users/register", () => {
   test("POST 201: Inserts a user's registration and returns its register details", () => {
     return request(app)

@@ -9,7 +9,6 @@ const {
   patchEventById,
   deleteEventById,
 } = require("./controllers/events-controllers");
-const { getHealthCheck } = require("./controllers/health-check-controllers");
 const {
   postLogin,
   postRegister,
@@ -24,8 +23,6 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.get("/api/healthcheck", getHealthCheck);
 
 app.get("/api/events", getEvents);
 app.post("/api/events", postEvent);
