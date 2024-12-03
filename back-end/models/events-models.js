@@ -2,13 +2,16 @@ const db = require("../db/connection");
 
 exports.selectEvents = (
   userData,
-  isAttending,
+  filter = "default",
   sortBy = "default",
   order = "ASC"
 ) => {
   const userId = userData.user.id || "00000000-0000-0000-0000-000000000000";
 
-  if (!["default", "start_time"].includes(sortBy)) {
+  if (!["default", "attending"].includes(filter)) {
+    return Promise.reject({ status: 400, msg: "Invalid filter query" });
+  }
+  if (!["default", "date"].includes(sortBy)) {
     return Promise.reject({ status: 400, msg: "Invalid sort query" });
   }
   const orderBy = order.toUpperCase();
@@ -39,7 +42,7 @@ exports.selectEvents = (
     FROM events
   `;
 
-  if (isAttending) {
+  if (filter === "attending") {
     sqlQueryString += `
     WHERE
     EXISTS (
@@ -49,9 +52,9 @@ exports.selectEvents = (
     ) `;
   }
 
-  if (sortBy === "start_time") {
+  if (sortBy === "date") {
     sqlQueryString += `
-    ORDER BY ${sortBy} ${orderBy};
+    ORDER BY start_time ${orderBy};
     `;
   }
 

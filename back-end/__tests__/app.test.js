@@ -65,8 +65,8 @@ describe("/api/users/login", () => {
   });
 });
 
-describe("/api/events", () => {
-  test.only("GET 200: Responds with an array of event objects", () => {
+describe.only("/api/events", () => {
+  test("GET 200: Responds with an array of event objects", () => {
     return request(app)
       .get("/api/events")
       .expect(200)
@@ -88,6 +88,65 @@ describe("/api/events", () => {
           expect(typeof event.image_dir).toBe("string");
           expect(typeof event.is_attending).toBe("boolean");
         });
+      });
+  });
+  test("GET 200: Responds with an array of event objects filtered by the passed filter query", async () => {
+    await request(app).post("/api/users-events/3");
+    await request(app).post("/api/users-events/4");
+    return request(app)
+      .get("/api/events?filter=attending")
+      .expect(200)
+      .then(({ body }) => {
+        const { events } = body;
+        events.forEach((event) => expect(event.is_attending).toBe(true));
+      });
+  });
+  test("GET 400: Returns with error if passed filter query is not valid", async () => {
+    return request(app)
+      .get("/api/events?filter=invalidFilter")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid filter query");
+      });
+  });
+  test("GET 200: Responds with an array of event objects sorted by the passed sort_by query in default ascending order", () => {
+    return request(app)
+      .get("/api/events?sort_by=date")
+      .expect(200)
+      .then(({ body }) => {
+        const { events } = body;
+        expect(events).toBeSortedBy("start_time", {
+          ascending: true,
+          coerce: true,
+        });
+      });
+  });
+  test("GET 200: Responds with an array of event objects sorted by the passed sort_by query and order query", () => {
+    return request(app)
+      .get("/api/events?sort_by=date&order=desc")
+      .expect(200)
+      .then(({ body }) => {
+        const { events } = body;
+        expect(events).toBeSortedBy("start_time", {
+          descending: true,
+          coerce: true,
+        });
+      });
+  });
+  test("GET 400: Returns with error if passed sort query is not valid", async () => {
+    return request(app)
+      .get("/api/events?sort_by=invalidSort")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid sort query");
+      });
+  });
+  test("GET 400: Returns with error if passed order query is not valid", async () => {
+    return request(app)
+      .get("/api/events?sort_by=date&order=invalidOrder")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Invalid order query");
       });
   });
 
