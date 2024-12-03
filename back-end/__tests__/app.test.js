@@ -46,7 +46,7 @@ describe("/api/users/register", () => {
 });
 
 describe("/api/users/login", () => {
-  test("POST 201: Inserts a user login and returns its user details", () => {
+  test.only("POST 201: Inserts a user login and returns its user details", () => {
     return request(app)
       .post("/api/users/login")
       .send({
@@ -244,6 +244,67 @@ describe("/api/events/:event_id", () => {
         expect(typeof event.updated_at).toBe("string");
         expect(event.created_by).toBe("hanif.uddz@gmail.com");
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
+      });
+  });
+  test.only("PATCH 404: Returns error if event id is not found in database", () => {
+    return request(app)
+      .patch("/api/events/100")
+      .send({
+        title: "Tech Conference 2024",
+        location: "San Francisco, CA",
+        date: "2024-12-05",
+        start_time: "2024-12-05T10:00:00",
+        end_time: "2024-12-05T15:00:00",
+        summary:
+          "A conference showcasing and exploring the latest in technology.",
+        description:
+          "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
+        created_at: "2024-11-25T10:30:00",
+        created_by: "hanif.uddz@gmail.com",
+        image_dir: "images/events/tech_conference.jpg",
+      })
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Event not found");
+      });
+  });
+  test.only("PATCH 400: Returns error if event id is invalid", () => {
+    return request(app)
+      .patch("/api/events/invalidID")
+      .send({
+        title: "Tech Conference 2024",
+        location: "San Francisco, CA",
+        date: "2024-12-05",
+        start_time: "2024-12-05T10:00:00",
+        end_time: "2024-12-05T15:00:00",
+        summary:
+          "A conference showcasing and exploring the latest in technology.",
+        description:
+          "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
+        created_at: "2024-11-25T10:30:00",
+        created_by: "hanif.uddz@gmail.com",
+        image_dir: "images/events/tech_conference.jpg",
+      })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
+  });
+  test.only("PATCH 400: Returns with error if passed event object is missing required fields", () => {
+    return request(app)
+      .patch("/api/events/1")
+      .send({
+        title: "Tech Conference 2024",
+        start_time: "2024-12-05T10:00:00",
+        end_time: "2024-12-05T15:00:00",
+        summary:
+          "A conference showcasing and exploring the latest in technology.",
+        created_by: "hanif.uddz@gmail.com",
+        image_dir: "images/events/tech_conference.jpg",
+      })
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
       });
   });
 
