@@ -181,11 +181,21 @@ exports.removeEventById = (userData, event_id) => {
   if (userRole !== "staff") {
     return Promise.reject({ status: 403, msg: "Unauthorised access" });
   }
-  return db.query(
-    `
+  return db
+    .query(
+      `
     DELETE FROM events
-    WHERE id = $1;
+    WHERE id = $1
+    RETURNING *;
     `,
-    [event_id]
-  );
+      [event_id]
+    )
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "Event not found",
+        });
+      }
+    });
 };

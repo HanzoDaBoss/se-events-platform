@@ -45,8 +45,8 @@ describe("/api/users/register", () => {
   });
 });
 
-describe("/api/users/login", () => {
-  test.only("POST 201: Inserts a user login and returns its user details", () => {
+describe.only("/api/users/login", () => {
+  test("POST 201: Inserts a user login and returns its user details", () => {
     return request(app)
       .post("/api/users/login")
       .send({
@@ -246,7 +246,7 @@ describe("/api/events/:event_id", () => {
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
       });
   });
-  test.only("PATCH 404: Returns error if event id is not found in database", () => {
+  test("PATCH 404: Returns error if event id is not found in database", () => {
     return request(app)
       .patch("/api/events/100")
       .send({
@@ -268,7 +268,7 @@ describe("/api/events/:event_id", () => {
         expect(body.msg).toBe("Event not found");
       });
   });
-  test.only("PATCH 400: Returns error if event id is invalid", () => {
+  test("PATCH 400: Returns error if event id is invalid", () => {
     return request(app)
       .patch("/api/events/invalidID")
       .send({
@@ -290,7 +290,7 @@ describe("/api/events/:event_id", () => {
         expect(body.msg).toBe("Bad request");
       });
   });
-  test.only("PATCH 400: Returns with error if passed event object is missing required fields", () => {
+  test("PATCH 400: Returns with error if passed event object is missing required fields", () => {
     return request(app)
       .patch("/api/events/1")
       .send({
@@ -311,9 +311,25 @@ describe("/api/events/:event_id", () => {
   test("DELETE 204: Deletes an event object corresponding to the passed id", () => {
     return request(app).delete("/api/events/6").expect(204);
   });
+  test("DELETE 404: Returns error if event id is not found in database", () => {
+    return request(app)
+      .delete("/api/events/100")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Event not found");
+      });
+  });
+  test("DELETE 400: Returns error if event id is invalid", () => {
+    return request(app)
+      .delete("/api/events/invalidID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
+  });
 });
 
-describe("/api/users-events/:event_id", () => {
+describe.only("/api/users-events/:event_id", () => {
   test("POST 201: Inserts an user-event object into users-events corresponding to the event id and returns it", () => {
     return request(app)
       .post("/api/users-events/2")
@@ -325,6 +341,23 @@ describe("/api/users-events/:event_id", () => {
         expect(userEvent.event_id).toBe(2);
       });
   });
+  test("POST 404: Returns with error if event id is not found in database", () => {
+    return request(app)
+      .post("/api/users-events/100")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Not found");
+      });
+  });
+  test("POST 400: Returns error if event id is invalid", () => {
+    return request(app)
+      .post("/api/users-events/invalidID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
+  });
+
   test("DELETE 204: Deletes an user-event object corresponding to the passed id", () => {
     return request(app).delete("/api/users-events/2").expect(204);
   });
