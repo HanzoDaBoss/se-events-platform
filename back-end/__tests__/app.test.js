@@ -14,7 +14,12 @@ afterAll(() => {
 
 describe("/api/healthcheck", () => {
   test("GET 200", () => {
-    return request(app).get("/api/healthcheck").expect(200);
+    return request(app)
+      .get("/api/healthcheck")
+      .expect(200)
+      .then(({ text }) => {
+        expect(text).toBe("App is running");
+      });
   });
 });
 
@@ -85,6 +90,7 @@ describe("/api/events", () => {
         });
       });
   });
+
   test("POST 201: Inserts an event object into events and returns it", () => {
     return request(app)
       .post("/api/events")
@@ -240,6 +246,7 @@ describe("/api/events/:event_id", () => {
         expect(event.image_dir).toBe("images/events/tech_conference.jpg");
       });
   });
+
   test("DELETE 204: Deletes an event object corresponding to the passed id", () => {
     return request(app).delete("/api/events/6").expect(204);
   });
