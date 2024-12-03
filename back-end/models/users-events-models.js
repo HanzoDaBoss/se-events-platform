@@ -27,11 +27,21 @@ exports.removeUserEventByEventId = (userData, event_id) => {
   if (insertVals.includes(undefined)) {
     return Promise.reject({ status: 400, msg: "Bad request" });
   }
-  return db.query(
-    `
+  return db
+    .query(
+      `
   DELETE FROM users_events
-  WHERE user_id = $1 AND event_id = $2;
+  WHERE user_id = $1 AND event_id = $2
+  RETURNING *;
   `,
-    insertVals
-  );
+      insertVals
+    )
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "Event not found",
+        });
+      }
+    });
 };

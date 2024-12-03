@@ -45,7 +45,7 @@ describe("/api/users/register", () => {
   });
 });
 
-describe.only("/api/users/login", () => {
+describe("/api/users/login", () => {
   test("POST 201: Inserts a user login and returns its user details", () => {
     return request(app)
       .post("/api/users/login")
@@ -329,7 +329,7 @@ describe("/api/events/:event_id", () => {
   });
 });
 
-describe.only("/api/users-events/:event_id", () => {
+describe("/api/users-events/:event_id", () => {
   test("POST 201: Inserts an user-event object into users-events corresponding to the event id and returns it", () => {
     return request(app)
       .post("/api/users-events/2")
@@ -360,6 +360,22 @@ describe.only("/api/users-events/:event_id", () => {
 
   test("DELETE 204: Deletes an user-event object corresponding to the passed id", () => {
     return request(app).delete("/api/users-events/2").expect(204);
+  });
+  test("POST 404: Returns with error if event id is not found in database", () => {
+    return request(app)
+      .delete("/api/users-events/100")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Event not found");
+      });
+  });
+  test("POST 400: Returns error if event id is invalid", () => {
+    return request(app)
+      .delete("/api/users-events/invalidID")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request");
+      });
   });
 });
 

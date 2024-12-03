@@ -41,6 +41,7 @@ exports.deleteLogout = (request, response, next) => {
   logoutUser(accessToken)
     .then(() => {
       response.clearCookie("accessToken");
+      response.clearCookie("refreshToken");
       response.status(204).send();
     })
     .catch(next);
