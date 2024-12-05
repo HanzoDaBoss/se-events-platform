@@ -4,11 +4,13 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
+import EventsList from "./components/EventsList";
 
 function App() {
   return (
     <>
-      <Login></Login>
+      {/* <Login></Login> */}
+      <EventsList></EventsList>
     </>
   );
 }
