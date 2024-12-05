@@ -11,7 +11,11 @@ const {
 
 const app = express();
 
-app.use(cors());
+let corsOptions = {
+  origin: ["http://localhost:5173"],
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser());
