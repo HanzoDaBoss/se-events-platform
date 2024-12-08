@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import moment from "moment";
 import { getEvents } from "../api";
 import { UserContext } from "./contexts/User";
 
@@ -36,9 +37,11 @@ export default function EventsList() {
               <Card.Title>{event.title}</Card.Title>
               <Card.Text>{event.summary}</Card.Text>
             </Card.Body>
-            <Card.Footer>{event.date.slice(0, 10)}</Card.Footer>
+            <Card.Footer>
+              {moment(event.date).format("MMM Do YYYY")}
+            </Card.Footer>
             <Card.Footer className="text-muted">
-              {event.start_time.slice(11, 16)}
+              {moment(event.start_time).format("h:mm a")}
             </Card.Footer>
           </Card>
         </Col>
