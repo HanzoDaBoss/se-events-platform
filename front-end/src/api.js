@@ -7,9 +7,9 @@ const api = axios.create({
 const postLogin = (loginObj) => {
   return api
     .post(`/users/login`, loginObj)
-    .then(({ data }) => {
-      console.log(data);
-      return data;
+    .then((response) => {
+      console.log(response);
+      return response;
     })
     .catch((error) => {
       console.log(error.response);
