@@ -10,7 +10,6 @@ exports.postLogin = (request, response, next) => {
     .then((user) => {
       const accessToken = user.session.access_token;
       const refreshToken = user.session.refresh_token;
-      const user_id = user.user.id;
       const user_data = user.user.user_metadata;
       response.cookie("accessToken", accessToken, {
         secure: true,
@@ -22,7 +21,7 @@ exports.postLogin = (request, response, next) => {
         httpOnly: true,
         maxAge: 7 * 24 * 60 * 60 * 1000, // Set the expiration time (7 days)
       });
-      response.status(201).send({ user_id, ...user_data });
+      response.status(201).send({ user_data });
     })
     .catch(next);
 };

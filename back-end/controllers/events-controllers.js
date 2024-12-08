@@ -11,9 +11,10 @@ exports.getEvents = (request, response, next) => {
   const { filter, sort_by, order } = request.query;
   authoriseUser(request, response)
     .then((userData) => {
+      const user = userData.user.user_metadata;
       selectEvents(userData, filter, sort_by, order)
         .then((events) => {
-          response.status(200).send({ events });
+          response.status(200).send({ user, events });
         })
         .catch(next);
     })
