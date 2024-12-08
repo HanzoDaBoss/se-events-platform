@@ -19,7 +19,7 @@ export default function LoginPage() {
 
   let navigate = useNavigate();
 
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const handleEmailInput = (e) => {
     setEmailInput(e.target.value);
@@ -37,7 +37,7 @@ export default function LoginPage() {
         if (response.status !== 201) {
           setLoginFailure(true);
         } else {
-          setUser(response.data);
+          setUser(response.data.user_data);
           navigate("/home");
         }
       }

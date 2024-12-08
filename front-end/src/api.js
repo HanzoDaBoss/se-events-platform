@@ -8,11 +8,9 @@ const postLogin = (loginObj) => {
   return api
     .post(`/users/login`, loginObj)
     .then((response) => {
-      console.log(response);
       return response;
     })
     .catch((error) => {
-      console.log(error.response);
       return error.response;
     });
 };
@@ -22,15 +20,15 @@ const getEvents = (filter_by, sort, order_by) => {
   const sort_by = sort || undefined;
   const order = order_by || undefined;
   return api
-    .get(`/articles`, {
+    .get(`/events`, {
       params: {
         filter,
         sort_by,
         order,
       },
     })
-    .then(({ data }) => {
-      return data.events;
+    .then((response) => {
+      return response;
     })
     .catch((error) => {
       return error.response;
