@@ -2,15 +2,18 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import Login from "./components/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import EventsList from "./components/EventsList";
+import LoginPage from "./components/LoginPage";
+import { Route, Routes } from "react-router";
 
 function App() {
   return (
     <>
-      {/* <Login></Login> */}
-      <EventsList></EventsList>
+      <Routes>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/home" element={<EventsList />}></Route>
+      </Routes>
     </>
   );
 }
