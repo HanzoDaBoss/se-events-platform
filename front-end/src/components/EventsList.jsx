@@ -28,24 +28,27 @@ export default function EventsList() {
   }, []);
 
   return (
-    <Row xs={1} md={2} lg={3} className="g-4">
-      {eventsList.map((event, index) => (
-        <Col key={index}>
-          <Card className="h-100 p-0">
-            <Card.Img variant="top" src="https://placehold.co/600x400" />
-            <Card.Body>
-              <Card.Title>{event.title}</Card.Title>
-              <Card.Text>{event.summary}</Card.Text>
-            </Card.Body>
-            <Card.Footer>
-              {moment(event.date).format("MMM Do YYYY")}
-            </Card.Footer>
-            <Card.Footer className="text-muted">
-              {moment(event.start_time).format("h:mm a")}
-            </Card.Footer>
-          </Card>
-        </Col>
-      ))}
-    </Row>
+    <>
+      <h1>Events</h1>
+      <Row xs={1} md={3} lg={4} className="g-4">
+        {eventsList.map((event, index) => (
+          <Col key={index}>
+            <Card className="h-100 p-0">
+              <Card.Img variant="top" src="https://placehold.co/600x400" />
+              <Card.Body>
+                <Card.Title>{event.title}</Card.Title>
+                <Card.Text>{event.summary}</Card.Text>
+              </Card.Body>
+              <Card.Footer>
+                {moment(event.date).format("MMM Do YYYY")}
+              </Card.Footer>
+              <Card.Footer className="text-muted">
+                {moment(event.start_time).format("h:mm a")}
+              </Card.Footer>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </>
   );
 }
