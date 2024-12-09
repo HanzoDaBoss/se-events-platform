@@ -55,7 +55,10 @@ export default function EventsList() {
           : eventsList.map((event, index) => (
               <Col key={index}>
                 <Card className="h-100 p-0">
-                  <Card.Img variant="top" src="https://placehold.co/600x400" />
+                  <Card.Img
+                    variant="top"
+                    src="https://placehold.co/600x400/000000/FFF"
+                  />
                   <Card.Body>
                     <Card.Title>{event.title}</Card.Title>
                     <Card.Text>{event.summary}</Card.Text>
