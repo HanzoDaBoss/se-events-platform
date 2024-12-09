@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -34,7 +34,7 @@ export default function EventsList() {
       <h1>Events</h1>
       <Row xs={1} md={3} lg={4} className="g-4 mt-2">
         {loading
-          ? Array.from({ length: 8 }).map((_, index) => (
+          ? Array.from({ length: 9 }).map((_, index) => (
               <Col key={index}>
                 <Card className="h-100 p-0">
                   <Card.Img variant="top" src="https://placehold.co/600x400" />
@@ -54,22 +54,28 @@ export default function EventsList() {
             ))
           : eventsList.map((event, index) => (
               <Col key={index}>
-                <Card className="h-100 p-0">
-                  <Card.Img
-                    variant="top"
-                    src="https://placehold.co/600x400/000000/FFF"
-                  />
-                  <Card.Body>
-                    <Card.Title>{event.title}</Card.Title>
-                    <Card.Text>{event.summary}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    {moment(event.date).format("MMM Do YYYY")}
-                  </Card.Footer>
-                  <Card.Footer className="text-muted">
-                    {moment(event.start_time).format("h:mm a")}
-                  </Card.Footer>
-                </Card>
+                <Link
+                  to={`/events/${event.id}`}
+                  key={event.id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Card className="h-100 p-0 zoom">
+                    <Card.Img
+                      variant="top"
+                      src="https://placehold.co/600x400/000000/FFF"
+                    />
+                    <Card.Body>
+                      <Card.Title>{event.title}</Card.Title>
+                      <Card.Text>{event.summary}</Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                      {moment(event.date).format("MMM Do YYYY")}
+                    </Card.Footer>
+                    <Card.Footer className="text-muted">
+                      {moment(event.start_time).format("h:mm a")}
+                    </Card.Footer>
+                  </Card>
+                </Link>
               </Col>
             ))}
       </Row>
