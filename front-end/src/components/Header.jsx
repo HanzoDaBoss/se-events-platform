@@ -14,12 +14,7 @@ export default function Header() {
     <></>
   ) : (
     <>
-      <Navbar
-        key="md"
-        expand="md"
-        className="bg-body-tertiary mb-3"
-        fixed="top"
-      >
+      <Navbar key="md" expand="md" className="bg-blur mb-3" fixed="top">
         <Container fluid>
           <Navbar.Brand href="/home">WentEvent</Navbar.Brand>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
