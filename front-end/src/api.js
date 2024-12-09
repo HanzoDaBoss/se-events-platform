@@ -35,4 +35,15 @@ const getEvents = (filter_by, sort, order_by) => {
     });
 };
 
-export { postLogin, getEvents };
+const getEventById = (event_id) => {
+  return api
+    .get(`/events/${event_id}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+export { postLogin, getEvents, getEventById };
