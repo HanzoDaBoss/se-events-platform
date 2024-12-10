@@ -27,6 +27,8 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
   text-align: center;
+  text-decoration: underline 4px solid #7d0cd4;
+  text-underline-offset: 8px;
 }
 
 .bg-blur {
@@ -41,6 +43,14 @@ h1 {
 .zoom:hover {
   transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
   border: 1px solid #7d0cd4;
+}
+
+.is-attending:hover span {
+  display: none
+}
+
+.is-attending:hover:before{
+  content: "✖ Cancel attendance"
 }
 
 

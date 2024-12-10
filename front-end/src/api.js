@@ -46,4 +46,27 @@ const getEventById = (event_id) => {
     });
 };
 
-export { postLogin, getEvents, getEventById };
+const postUserEventByEventId = (event_id) => {
+  return api
+    .post(`/users-events/${event_id}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
+const deleteUserEventByEventId = (event_id) => {
+  return api.delete(`/users-events/${event_id}`).catch((error) => {
+    return error.response;
+  });
+};
+
+export {
+  postLogin,
+  getEvents,
+  getEventById,
+  postUserEventByEventId,
+  deleteUserEventByEventId,
+};
