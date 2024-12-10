@@ -6,14 +6,16 @@ import LoginPage from "./components/LoginPage";
 import { Route, Routes } from "react-router";
 import Header from "./components/Header";
 import EventPage from "./components/EventPage";
+import HomePage from "./components/HomePage";
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
+        <Route path="/home" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/home" element={<EventsList />}></Route>
+        <Route path="/events" element={<EventsList />}></Route>
         <Route path="/events/:event_id" element={<EventPage />}></Route>
       </Routes>
     </>

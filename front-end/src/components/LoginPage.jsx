@@ -38,7 +38,7 @@ export default function LoginPage() {
           setLoginFailure(true);
         } else {
           setUser(response.data.user_data);
-          navigate("/home");
+          navigate("/events");
         }
       }
     );
