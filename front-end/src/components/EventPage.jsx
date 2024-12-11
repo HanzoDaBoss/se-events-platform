@@ -5,6 +5,7 @@ import {
   getEventById,
   postUserEventByEventId,
 } from "../api";
+import GoogleCalendarModal from "./GoogleCalendarModal";
 
 import Button from "react-bootstrap/Button";
 import moment from "moment";
@@ -21,6 +22,7 @@ export default function EventPage() {
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [isAttending, setIsAttending] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -44,6 +46,7 @@ export default function EventPage() {
     postUserEventByEventId(event_id).then(() => {
       setIsAttending(true);
       setButtonLoading(false);
+      setModalShow(true);
     });
   };
 
@@ -60,6 +63,12 @@ export default function EventPage() {
 
   return (
     <>
+      <GoogleCalendarModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        eventId={event_id}
+        event={event}
+      />
       <Col>
         <Card className="h-100 p-0 shadow-sm">
           <Card.Img

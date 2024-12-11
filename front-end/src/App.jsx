@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router";
 import Header from "./components/Header";
 import EventPage from "./components/EventPage";
 import HomePage from "./components/HomePage";
+import SignInSuccessGooglePage from "./components/SignInSuccessGooglePage";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
       <Routes>
         <Route path="/home" element={<HomePage />}></Route>
         <Route path="/login" element={<LoginPage />}></Route>
+        <Route
+          path="login-google/success"
+          element={<SignInSuccessGooglePage />}
+        ></Route>
         <Route path="/events" element={<EventsList />}></Route>
         <Route path="/events/:event_id" element={<EventPage />}></Route>
       </Routes>
