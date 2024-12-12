@@ -32,7 +32,7 @@ export default function EventsList() {
   return (
     <>
       <h1>Events</h1>
-      <Row xs={1} md={3} lg={4} className="g-4 mt-2">
+      <Row xs={1} md={3} lg={4} className="g-4 mt-2 mx-5">
         {loading
           ? Array.from({ length: 9 }).map((_, index) => (
               <Col key={index}>

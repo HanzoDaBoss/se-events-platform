@@ -25,10 +25,10 @@ export default function HomePage() {
         </p>
       </section>
       <section className="d-flex justify-content-center gap-3">
-        <Button className="btn btn-primary btn-lg" href="/events">
+        <Button className="btn purple btn-lg" href="/events">
           Events <i className="bi bi-arrow-right"></i>
         </Button>
-        <Button className="btn btn-secondary btn-lg" href="/login">
+        <Button className="btn purple-outline btn-lg" href="/login">
           Login <i className="bi bi-arrow-right"></i>
         </Button>
       </section>

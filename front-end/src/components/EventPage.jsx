@@ -70,7 +70,7 @@ export default function EventPage() {
         event={event}
       />
       <Col>
-        <Card className="h-100 p-0 shadow-sm">
+        <Card className="h-100 p-0 shadow-sm mx-5">
           <Card.Img
             variant="top"
             src="https://placehold.co/600x400/000000/FFF"

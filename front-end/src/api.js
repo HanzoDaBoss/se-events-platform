@@ -15,6 +15,17 @@ const postLogin = (loginObj) => {
     });
 };
 
+const deleteLogout = () => {
+  return api
+    .delete(`/users/logout`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 const getEvents = (filter_by, sort, order_by) => {
   const filter = filter_by || undefined;
   const sort_by = sort || undefined;
@@ -65,6 +76,7 @@ const deleteUserEventByEventId = (event_id) => {
 
 export {
   postLogin,
+  deleteLogout,
   getEvents,
   getEventById,
   postUserEventByEventId,

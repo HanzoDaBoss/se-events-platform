@@ -4,12 +4,20 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
 import { UserContext } from "./contexts/User";
+import { deleteLogout } from "../api";
+import { useNavigate } from "react-router";
 
 export default function Header() {
+  let navigate = useNavigate();
+  const handleLogoutUser = () => {
+    return deleteLogout().then(() => {
+      navigate("/login");
+    });
+  };
+
   const { user } = useContext(UserContext);
+  console.log(user);
   return !user ? (
     <></>
   ) : (
@@ -30,19 +38,10 @@ export default function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                {["Home", "My Profile", "Log out"].map((navTitle, index) => (
-                  <OverlayTrigger
-                    placement="bottom"
-                    overlay={
-                      <Tooltip id={`tooltip-${navTitle}`}>
-                        Go to <strong>{navTitle}</strong>.
-                      </Tooltip>
-                    }
-                    key={index}
-                  >
-                    <Nav.Link>{navTitle}</Nav.Link>
-                  </OverlayTrigger>
-                ))}
+                <Nav.Link>Home</Nav.Link>
+                <Nav.Link>My Profile</Nav.Link>
+                {!user.role === "staff" ? <Nav.Link>Staff</Nav.Link> : <></>}
+                <Nav.Link onClick={handleLogoutUser}>Log out</Nav.Link>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

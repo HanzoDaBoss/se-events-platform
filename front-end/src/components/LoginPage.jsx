@@ -45,60 +45,63 @@ export default function LoginPage() {
   };
 
   return (
-    <Container fluid="md">
-      <Row>
-        <Col>
-          {" "}
-          <Form
-            onSubmit={handleSubmitLogin}
-            className="d-flex flex-column justify-content-center"
-          >
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                onChange={handleEmailInput}
-                value={emailInput}
-              />
-            </Form.Group>
+    <Form
+      onSubmit={handleSubmitLogin}
+      className="d-flex flex-column justify-content-center"
+    >
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <h2>Login to WentEvent</h2>
+        <Form.Label>
+          Don't have an account? <span className="purple-text">Sign Up</span>
+        </Form.Label>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="wentevent@example.com"
+          onChange={handleEmailInput}
+          value={emailInput}
+        />
+      </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                onChange={handlePasswordInput}
-                value={passwordInput}
-              />
-            </Form.Group>
-            {!loginFailure ? (
-              <></>
-            ) : (
-              <Alert variant="danger">
-                <p>Email or password invalid</p>
-              </Alert>
-            )}
-            <Button variant="outline-info" disabled={loading} type="submit">
-              {loading ? (
-                <>
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    className="me-1"
-                  />
-                  <span>Logging in</span>
-                </>
-              ) : (
-                "Login"
-              )}
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="••••••••••"
+          onChange={handlePasswordInput}
+          value={passwordInput}
+        />
+        <Form.Label className="purple-text">Forgot Password?</Form.Label>
+      </Form.Group>
+      {!loginFailure ? (
+        <></>
+      ) : (
+        <Alert variant="danger">
+          <p>Email or password invalid</p>
+        </Alert>
+      )}
+      <Button disabled={loading} type="submit" className="btn purple-outline">
+        {loading ? (
+          <>
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+              className="me-1"
+            />
+            <span>Logging in</span>
+          </>
+        ) : (
+          "Login"
+        )}
+      </Button>
+      <Button variant="outline-primary" className="w-100 mt-3">
+        <i className="bi bi-google me-2"></i> Sign in with Google
+      </Button>
+    </Form>
   );
 }
