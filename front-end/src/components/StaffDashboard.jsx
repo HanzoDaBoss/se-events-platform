@@ -9,26 +9,38 @@ import Row from "react-bootstrap/Row";
 export default function StaffDashboard() {
   const { user } = useContext(UserContext);
 
-  return user.role === "staff" ? (
+  return !user ? (
+    <Navigate to="/login" />
+  ) : user.role === "staff" ? (
     <>
       <h1>Staff Dashboard</h1>
-      <Row xs={1} md={2} lg={2} className="g-4 mt-2 mx-5 px-5">
+      <Row xs={1} md={2} lg={2} className="g-4 mt-2 mx-5">
         {[
-          { name: "Events", url: "events" },
-          { name: "Users", url: "users" },
+          {
+            name: "Events",
+            url: "events",
+            color: "primary",
+            icon: "bi bi-calendar4-event",
+          },
+          {
+            name: "Users",
+            url: "users",
+            color: "success",
+            icon: "bi bi-people",
+          },
         ].map((item, index) => (
           <Col key={index}>
             <Link to={`/admin/${item.url}`} style={{ textDecoration: "none" }}>
-              <Card className="h-100 p-0 zoom">
-                <Card.Img
-                  variant="top"
-                  src="https://placehold.co/600x400/000000/FFF"
-                />
+              <Card className="h-100 p-0 zoom" bg={item.color}>
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
+                  <h1>
+                    <i class={item.icon}></i>
+                  </h1>
+                  <Card.Title>X {item.url} created</Card.Title>
                 </Card.Body>
-                <Card.Footer className="text-muted">
-                  Manage {item.url} {">"}
+                <Card.Footer className="text-center">
+                  Manage {item.url} <i class="bi bi-arrow-right-circle"></i>
                 </Card.Footer>
               </Card>
             </Link>
@@ -37,6 +49,6 @@ export default function StaffDashboard() {
       </Row>
     </>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to="/events" />
   );
 }
