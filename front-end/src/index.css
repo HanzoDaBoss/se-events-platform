@@ -33,6 +33,14 @@ h1 {
   text-underline-offset: 8px;
 }
 
+.google {
+  border: double 1px transparent;
+  border-radius: 40px;
+  background-image: linear-gradient(white, white), radial-gradient(circle at top left, #b827fc 0%, #2c90fc 25%, #b8fd33 50%, #fec837 75%, #fd1892 100%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
 .purple-text {
   color: #7d0cd4 !important;
 }

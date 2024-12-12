@@ -11,18 +11,7 @@ export default function HomePage() {
         </p>
       </header>
       <section className="mb-5">
-        <p
-          className="fw-bold p-2"
-          style={{
-            display: "inline-block",
-            borderRadius: "8px",
-            border: "2px solid",
-            borderImage:
-              "linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet) 1",
-          }}
-        >
-          Powered with Google Calendar
-        </p>
+        <p className="p-2 mx-5 google">Powered with Google</p>
       </section>
       <section className="d-flex justify-content-center gap-3">
         <Button className="btn purple btn-lg" href="/events">
