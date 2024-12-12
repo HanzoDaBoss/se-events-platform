@@ -10,6 +10,7 @@ import HomePage from "./components/HomePage";
 import SignInSuccessGooglePage from "./components/SignInSuccessGooglePage";
 import RegisterPage from "./components/RegisterPage";
 import RegisterSuccessPage from "./components/RegisterSuccessPage";
+import StaffDashboard from "./components/StaffDashboard";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/" element={<Navigate replace to="/home" />} />
+        <Route path="/staff" element={<StaffDashboard />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/register/success" element={<RegisterSuccessPage />} />

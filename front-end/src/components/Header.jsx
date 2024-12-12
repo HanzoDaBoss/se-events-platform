@@ -6,18 +6,19 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { UserContext } from "./contexts/User";
 import { deleteLogout } from "../api";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Header() {
   let navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
+
   const handleLogoutUser = () => {
     return deleteLogout().then(() => {
+      setUser();
       navigate("/login");
     });
   };
 
-  const { user } = useContext(UserContext);
-  console.log(user);
   return !user ? (
     <></>
   ) : (
@@ -40,9 +41,17 @@ export default function Header() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link>Home</Nav.Link>
+                <Link to="/events" style={{ textDecoration: "none" }}>
+                  <Nav.Link as="a">Events</Nav.Link>
+                </Link>
                 <Nav.Link>My Profile</Nav.Link>
-                {!user.role === "staff" ? <Nav.Link>Staff</Nav.Link> : <></>}
+                {user.role === "staff" ? (
+                  <Link to="/staff" style={{ textDecoration: "none" }}>
+                    <Nav.Link as="a">Staff</Nav.Link>
+                  </Link>
+                ) : (
+                  <></>
+                )}
                 <Nav.Link onClick={handleLogoutUser}>Log out</Nav.Link>
               </Nav>
             </Offcanvas.Body>
