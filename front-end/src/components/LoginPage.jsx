@@ -1,15 +1,12 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 
 import { useContext, useState } from "react";
 import { postLogin } from "../api";
 import { UserContext } from "./contexts/User";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function LoginPage() {
   const [emailInput, setEmailInput] = useState("");
@@ -50,9 +47,17 @@ export default function LoginPage() {
       className="d-flex flex-column justify-content-center"
     >
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <h2>Login to WentEvent</h2>
+        <h2>
+          Login to Went<span className="purple-text">Event</span>
+        </h2>
         <Form.Label>
-          Don't have an account? <span className="purple-text">Sign Up</span>
+          Don't have an account?{" "}
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "#7d0cd4" }}
+          >
+            Sign Up
+          </Link>
         </Form.Label>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">

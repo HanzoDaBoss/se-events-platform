@@ -15,6 +15,17 @@ const postLogin = (loginObj) => {
     });
 };
 
+const postRegister = (registerObj) => {
+  return api
+    .post(`/users/register`, registerObj)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 const deleteLogout = () => {
   return api
     .delete(`/users/logout`)
@@ -76,6 +87,7 @@ const deleteUserEventByEventId = (event_id) => {
 
 export {
   postLogin,
+  postRegister,
   deleteLogout,
   getEvents,
   getEventById,
