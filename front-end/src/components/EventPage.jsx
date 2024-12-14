@@ -73,7 +73,7 @@ export default function EventPage() {
         <Card className="h-100 p-0 shadow-sm mx-5">
           <Card.Img
             variant="top"
-            src="https://placehold.co/600x400/000000/FFF"
+            src={`/src/assets/${event.image_dir}`}
             alt={event.title}
           />
           <Card.Body>

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -42,12 +41,12 @@ export default function Header() {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Link to="/events" style={{ textDecoration: "none" }}>
-                  <Nav.Link as="a">Events</Nav.Link>
+                  <Nav.Link as="li">Events</Nav.Link>
                 </Link>
                 <Nav.Link>My Profile</Nav.Link>
                 {user.role === "staff" ? (
                   <Link to="/staff" style={{ textDecoration: "none" }}>
-                    <Nav.Link as="a">Staff</Nav.Link>
+                    <Nav.Link as="li">Staff</Nav.Link>
                   </Link>
                 ) : (
                   <></>

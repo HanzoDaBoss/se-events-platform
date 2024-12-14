@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
+import { UserContext } from "./contexts/User";
+import { getEvents } from "../api";
+import moment from "moment";
+
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Placeholder from "react-bootstrap/Placeholder";
-import moment from "moment";
-import { getEvents } from "../api";
-import { UserContext } from "./contexts/User";
 
-export default function EventsList() {
+export default function EventsList({ eventPagePath }) {
   const [loading, setLoading] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 
@@ -30,55 +31,56 @@ export default function EventsList() {
   }, []);
 
   return (
-    <>
-      <h1>Events</h1>
-      <Row xs={1} md={3} lg={4} className="g-4 mt-2 mx-5">
-        {loading
-          ? Array.from({ length: 9 }).map((_, index) => (
-              <Col key={index}>
-                <Card className="h-100 p-0">
-                  <Card.Img variant="top" src="https://placehold.co/600x400" />
+    <Row xs={1} md={3} lg={4} className="g-4 mt-2 mx-5">
+      {loading
+        ? Array.from({ length: 9 }).map((_, index) => (
+            <Col key={index}>
+              <Card className="h-100 p-0">
+                <Card.Img variant="top" src="https://placehold.co/600x400" />
+                <Card.Body>
+                  <Placeholder as={Card.Title} animation="glow">
+                    <Placeholder xs={6} />
+                  </Placeholder>
+                  <Placeholder as={Card.Text} animation="glow">
+                    <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
+                    <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
+                    <Placeholder xs={8} />
+                  </Placeholder>
+                  <Placeholder.Button variant="primary" xs={6} />
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        : eventsList.map((event, index) => (
+            <Col key={index}>
+              <Link
+                to={`${eventPagePath}${event.id}`}
+                key={event.id}
+                style={{ textDecoration: "none" }}
+              >
+                <Card className="h-100 p-0 zoom">
+                  <Card.Img
+                    variant="top"
+                    src={`${
+                      import.meta.env.VITE_SUPABASE_URL
+                    }/storage/v1/object/public/images-events/${
+                      event.image_dir
+                    }`}
+                  />
                   <Card.Body>
-                    <Placeholder as={Card.Title} animation="glow">
-                      <Placeholder xs={6} />
-                    </Placeholder>
-                    <Placeholder as={Card.Text} animation="glow">
-                      <Placeholder xs={7} /> <Placeholder xs={4} />{" "}
-                      <Placeholder xs={4} /> <Placeholder xs={6} />{" "}
-                      <Placeholder xs={8} />
-                    </Placeholder>
-                    <Placeholder.Button variant="primary" xs={6} />
+                    <Card.Title>{event.title}</Card.Title>
+                    <Card.Text>{event.summary}</Card.Text>
                   </Card.Body>
+                  <Card.Footer>
+                    {moment(event.date).format("MMM Do YYYY")}
+                  </Card.Footer>
+                  <Card.Footer className="text-muted">
+                    {moment(event.start_time).format("h:mm a")}
+                  </Card.Footer>
                 </Card>
-              </Col>
-            ))
-          : eventsList.map((event, index) => (
-              <Col key={index}>
-                <Link
-                  to={`/events/${event.id}`}
-                  key={event.id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Card className="h-100 p-0 zoom">
-                    <Card.Img
-                      variant="top"
-                      src="https://placehold.co/600x400/000000/FFF"
-                    />
-                    <Card.Body>
-                      <Card.Title>{event.title}</Card.Title>
-                      <Card.Text>{event.summary}</Card.Text>
-                    </Card.Body>
-                    <Card.Footer>
-                      {moment(event.date).format("MMM Do YYYY")}
-                    </Card.Footer>
-                    <Card.Footer className="text-muted">
-                      {moment(event.start_time).format("h:mm a")}
-                    </Card.Footer>
-                  </Card>
-                </Link>
-              </Col>
-            ))}
-      </Row>
-    </>
+              </Link>
+            </Col>
+          ))}
+    </Row>
   );
 }

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, Navigate } from "react-router";
-import { UserContext } from "./contexts/User";
+import { UserContext } from "../contexts/User";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -30,17 +30,17 @@ export default function StaffDashboard() {
           },
         ].map((item, index) => (
           <Col key={index}>
-            <Link to={`/admin/${item.url}`} style={{ textDecoration: "none" }}>
+            <Link to={`/staff/${item.url}`} style={{ textDecoration: "none" }}>
               <Card className="h-100 p-0 zoom" bg={item.color}>
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
                   <h1>
-                    <i class={item.icon}></i>
+                    <i className={item.icon}></i>
                   </h1>
                   <Card.Title>X {item.url} created</Card.Title>
                 </Card.Body>
                 <Card.Footer className="text-center">
-                  Manage {item.url} <i class="bi bi-arrow-right-circle"></i>
+                  Manage {item.url} <i className="bi bi-arrow-right-circle"></i>
                 </Card.Footer>
               </Card>
             </Link>
