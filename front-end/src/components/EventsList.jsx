@@ -63,7 +63,7 @@ export default function EventsList({ eventPagePath }) {
                     variant="top"
                     src={`${
                       import.meta.env.VITE_SUPABASE_URL
-                    }/storage/v1/object/public/images-events/${
+                    }/storage/v1/object/public/images/events/${
                       event.image_dir
                     }`}
                   />

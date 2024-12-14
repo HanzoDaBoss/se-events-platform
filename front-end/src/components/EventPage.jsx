@@ -73,7 +73,9 @@ export default function EventPage() {
         <Card className="h-100 p-0 shadow-sm mx-5">
           <Card.Img
             variant="top"
-            src={`/src/assets/${event.image_dir}`}
+            src={`${
+              import.meta.env.VITE_SUPABASE_URL
+            }/storage/v1/object/public/images/events/${event.image_dir}`}
             alt={event.title}
           />
           <Card.Body>
