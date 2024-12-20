@@ -13,12 +13,11 @@ import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
 
-export default function EventPage() {
+export default function EventPage({ event, setEvent }) {
   const { event_id } = useParams();
 
   let navigate = useNavigate();
 
-  const [event, setEvent] = useState({});
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
   const [isAttending, setIsAttending] = useState(false);

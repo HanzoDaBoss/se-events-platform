@@ -1,8 +1,8 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { useContext, useState } from "react";
-import { UserContext } from "../contexts/User";
-import { postEvent } from "../../api";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { updateEventById } from "../../api";
+import moment from "moment";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -10,29 +10,33 @@ import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
 import EventForm from "./EventForm";
 
-export default function AddEventModal({ show, onHide }) {
+export default function UpdateEventModal({ show, onHide, prevEvent }) {
   const supabase = useSupabaseClient();
+  let navigate = useNavigate();
 
-  const { user } = useContext(UserContext);
+  const eventLocationArray = prevEvent.location.split(", ");
 
   const [eventInput, setEventInput] = useState({
-    title: "",
-    city: "",
-    postcode: "",
-    date: "",
-    start_time: "",
-    end_time: "",
-    summary: "",
-    description: "",
+    title: prevEvent.title,
+    city: eventLocationArray[0],
+    postcode: eventLocationArray[1],
+    date: moment(prevEvent.date).format("YYYY-MM-DD"),
+    start_time: moment(prevEvent.start_time).format("HH:mm"),
+    end_time: moment(prevEvent.end_time).format("HH:mm"),
+    summary: prevEvent.summary,
+    description: prevEvent.description,
+    created_at: prevEvent.created_at,
+    created_by: prevEvent.created_by,
+    imageFileName: prevEvent.image_dir,
   });
   const [imageFileInput, setImageFileInput] = useState({});
-  const [submitEventFailure, setSubmitEventFailure] = useState(false);
-  const [submitEventFailureMsg, setSubmitEventFailureMsg] = useState("");
+  const [updateEventFailure, setUpdateEventFailure] = useState(false);
+  const [updateEventFailureMsg, setUpdateEventFailureMsg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleEventInputChange = (e) => {
-    setEventInput((prevEvent) => {
-      return { ...prevEvent, [e.target.name]: e.target.value };
+    setEventInput((currEvent) => {
+      return { ...currEvent, [e.target.name]: e.target.value };
     });
   };
 
@@ -40,11 +44,9 @@ export default function AddEventModal({ show, onHide }) {
     setImageFileInput(e.target.files[0]);
   };
 
-  const submitNewEvent = (e) => {
+  const submitUpdatedEvent = (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const imageFileName = uuidv4();
 
     const eventObj = {
       title: eventInput.title,
@@ -54,32 +56,43 @@ export default function AddEventModal({ show, onHide }) {
       end_time: `${eventInput.date}T${eventInput.end_time}:00`,
       summary: eventInput.summary,
       description: eventInput.description,
-      created_by: user.email,
-      image_dir: imageFileName,
+      created_at: eventInput.created_at,
+      created_by: eventInput.created_by,
+      image_dir: eventInput.imageFileName,
     };
 
     if (eventInput.start_time > eventInput.end_time) {
       setLoading(false);
-      setSubmitEventFailure(true);
-      setSubmitEventFailureMsg(
+      setUpdateEventFailure(true);
+      setUpdateEventFailureMsg(
         "Event end time cannot be before start time. Please change these details and try again."
       );
     } else {
-      const submitEventPromise = postEvent(eventObj);
-      const uploadImagePromise = supabase.storage
-        .from("images")
-        .upload("events/" + imageFileName, imageFileInput);
-      return Promise.all([submitEventPromise, uploadImagePromise])
-        .then((promises) => {
+      return updateEventById(prevEvent.id, eventObj)
+        .then(() => {
+          if (imageFileInput.name) {
+            return supabase.storage
+              .from("images")
+              .update("events/" + eventInput.imageFileName, imageFileInput, {
+                cacheControl: "10",
+                upsert: true,
+              })
+              .then(() => {
+                setLoading(false);
+                setUpdateEventFailure(false);
+                onHide();
+                navigate("/staff/events");
+              });
+          }
           setLoading(false);
-          setSubmitEventFailure(false);
+          setUpdateEventFailure(false);
           onHide();
-          window.location.reload();
+          navigate("/staff/events");
         })
         .catch((error) => {
           setLoading(false);
-          setSubmitEventFailure(true);
-          setSubmitEventFailureMsg(
+          setUpdateEventFailure(true);
+          setUpdateEventFailureMsg(
             "There was an error processing your submission. Please verify the event details and try again."
           );
           return error;
@@ -89,7 +102,7 @@ export default function AddEventModal({ show, onHide }) {
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Add a new event</Modal.Title>
+        <Modal.Title>Update this event</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <EventForm
@@ -99,17 +112,17 @@ export default function AddEventModal({ show, onHide }) {
         />
       </Modal.Body>
       <Modal.Footer>
-        {!submitEventFailure ? (
+        {!updateEventFailure ? (
           <></>
         ) : (
           <Alert variant="danger" className="mb-2">
-            <p>{submitEventFailureMsg}</p>
+            <p>{updateEventFailureMsg}</p>
           </Alert>
         )}
         <Button variant="secondary" onClick={onHide}>
           Close
         </Button>
-        <Button className="purple" onClick={submitNewEvent}>
+        <Button className="purple" onClick={submitUpdatedEvent}>
           {loading ? (
             <>
               <Spinner
@@ -120,10 +133,10 @@ export default function AddEventModal({ show, onHide }) {
                 aria-hidden="true"
                 className="me-1"
               />
-              <span>Posting</span>
+              <span>Updating</span>
             </>
           ) : (
-            "Post event"
+            "Update event"
           )}
         </Button>
       </Modal.Footer>

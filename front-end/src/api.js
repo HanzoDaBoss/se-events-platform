@@ -91,6 +91,12 @@ const postEvent = (eventObj) => {
   });
 };
 
+const updateEventById = (event_id, eventObj) => {
+  return api.patch(`/events/${event_id}`, eventObj).then((response) => {
+    return response;
+  });
+};
+
 export {
   postLogin,
   postRegister,
@@ -100,4 +106,5 @@ export {
   postUserEventByEventId,
   deleteUserEventByEventId,
   postEvent,
+  updateEventById,
 };

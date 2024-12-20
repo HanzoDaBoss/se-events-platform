@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { UserContext } from "./contexts/User";
 import { getEvents } from "../api";
-import moment from "moment";
 
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Placeholder from "react-bootstrap/Placeholder";
+import EventCardWrapper from "./EventCardWrapper";
 
-export default function EventsList({ eventPagePath }) {
+export default function EventsList({ wrapper, setUpdateEventModalShow }) {
   const [loading, setLoading] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 
@@ -53,32 +53,7 @@ export default function EventsList({ eventPagePath }) {
           ))
         : eventsList.map((event, index) => (
             <Col key={index}>
-              <Link
-                to={`${eventPagePath}${event.id}`}
-                key={event.id}
-                style={{ textDecoration: "none" }}
-              >
-                <Card className="h-100 p-0 zoom">
-                  <Card.Img
-                    variant="top"
-                    src={`${
-                      import.meta.env.VITE_SUPABASE_URL
-                    }/storage/v1/object/public/images/events/${
-                      event.image_dir
-                    }`}
-                  />
-                  <Card.Body>
-                    <Card.Title>{event.title}</Card.Title>
-                    <Card.Text>{event.summary}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    {moment(event.date).format("MMM Do YYYY")}
-                  </Card.Footer>
-                  <Card.Footer className="text-muted">
-                    {moment(event.start_time).format("h:mm a")}
-                  </Card.Footer>
-                </Card>
-              </Link>
+              <EventCardWrapper event={event} wrapper={wrapper} />
             </Col>
           ))}
     </Row>
