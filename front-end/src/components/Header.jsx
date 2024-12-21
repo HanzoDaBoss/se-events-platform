@@ -30,7 +30,7 @@ export default function Header() {
             <Image
               className="d-inline-block align-top"
               width="200"
-              src="images/header-logo.png"
+              src="/images/header-logo.png"
             />
           </Navbar.Brand>
           <Navbar.Toggle
@@ -47,7 +47,7 @@ export default function Header() {
                 <Image
                   className="d-inline-block align-top"
                   width="200"
-                  src="images/header-logo.png"
+                  src="/images/header-logo.png"
                 />
               </Offcanvas.Title>
             </Offcanvas.Header>
