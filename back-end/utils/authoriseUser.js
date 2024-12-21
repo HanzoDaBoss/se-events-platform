@@ -3,6 +3,8 @@ const { supabaseUser } = require("../db/supabase-connection");
 exports.authoriseUser = (request, response) => {
   const { accessToken } = request.cookies;
   const refresh_token = request.cookies.refreshToken;
+  console.log("Access Token:", accessToken);
+  console.log("Refresh Token:", refresh_token);
 
   return supabaseUser.auth.getUser(accessToken).then(({ data, error }) => {
     if (error) {
