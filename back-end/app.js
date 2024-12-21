@@ -12,7 +12,7 @@ const {
 const app = express();
 
 let corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: ["http://localhost:5173", "https://wentevent.netlify.app"],
 };
 
 app.use(cors(corsOptions));
