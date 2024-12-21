@@ -10,8 +10,8 @@ module.exports = [
       "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology.",
     created_at: "2024-11-25T10:30:00",
     updated_at: "2024-11-25T10:30:00",
-    created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/tech_conference.jpg",
+    created_by: "test-staff@test.com",
+    image_dir: "tech_conference.jpg",
   },
   {
     title: "Art in the Park",
@@ -24,8 +24,8 @@ module.exports = [
       "Experience the beauty of art in the heart of the city with exhibitions, workshops, and live performances.",
     created_at: "2024-11-20T14:00:00",
     updated_at: "2024-11-22T09:00:00",
-    created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/art_in_the_park.jpg",
+    created_by: "test-staff@test.com",
+    image_dir: "art_in_the_park.jpg",
   },
   {
     title: "Startup Pitch Night",
@@ -38,8 +38,8 @@ module.exports = [
       "Be part of an exciting evening where innovative startups showcase their ideas to a panel of judges and potential investors.",
     created_at: "2024-11-10T08:15:00",
     updated_at: "2024-11-18T15:45:00",
-    created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/startup_pitch.jpg",
+    created_by: "test-staff@test.com",
+    image_dir: "startup_pitch.jpg",
   },
   {
     title: "Yoga Retreat",
@@ -52,8 +52,8 @@ module.exports = [
       "Rejuvenate your body and mind in a serene setting with expert-led yoga sessions, meditation, and wellness talks.",
     created_at: "2024-11-15T12:00:00",
     updated_at: "2024-11-19T17:30:00",
-    created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/yoga_retreat.jpg",
+    created_by: "test-staff@test.com",
+    image_dir: "yoga_retreat.jpg",
   },
   {
     title: "Book Club Meetup",
@@ -66,7 +66,7 @@ module.exports = [
       "A cozy gathering for book lovers to discuss the latest bestsellers over coffee and snacks.",
     created_at: "2024-11-12T16:00:00",
     updated_at: "2024-11-20T11:00:00",
-    created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/book_club_meetup.jpg",
+    created_by: "test-staff@test.com",
+    image_dir: "book_club_meetup.jpg",
   },
 ];

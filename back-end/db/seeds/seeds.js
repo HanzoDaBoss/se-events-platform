@@ -36,11 +36,11 @@ const seed = ({ eventsData, usersData }) => {
       return db.query(`
       CREATE TABLE users (
         id UUID PRIMARY KEY REFERENCES auth.users ON delete cascade,
-        email VARCHAR NOT NULL UNIQUE,
-        username VARCHAR NOT NULL,
-        first_name VARCHAR NOT NULL,
-        last_name VARCHAR NOT NULL,
-        role VARCHAR NOT NULL
+        email VARCHAR UNIQUE,
+        username VARCHAR,
+        first_name VARCHAR,
+        last_name VARCHAR,
+        role VARCHAR
       );
       `);
     })
