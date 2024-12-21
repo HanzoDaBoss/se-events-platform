@@ -7,7 +7,7 @@ const data = require("../db/data/development-data/index");
 beforeAll(() => {
   return seed(data).then(() => {
     return request(app).post("/api/users/login").send({
-      email: "alex.volk@example.com",
+      email: "test-user@wentevent.com",
       password: "password123",
     });
   });
@@ -37,7 +37,7 @@ describe("/api/users/login", () => {
     return request(app)
       .post("/api/users/login")
       .send({
-        email: "notexist@example.com",
+        email: "notexist@wentevent.com",
         password: "password987",
       })
       .expect(400)
@@ -60,8 +60,8 @@ describe("/api/events", () => {
         summary: "An elegant evening of celebration and networking.",
         description:
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/winter_gala.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "winter_gala.jpg",
       })
       .expect(403)
       .then(({ body }) => {
@@ -85,8 +85,8 @@ describe("/api/events/:event_id", () => {
         description:
           "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
         created_at: "2024-11-25T10:30:00",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/tech_conference.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "tech_conference.jpg",
       })
       .expect(403)
       .then(({ body }) => {

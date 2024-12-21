@@ -39,17 +39,17 @@ describe("/api/users/login", () => {
     return request(app)
       .post("/api/users/login")
       .send({
-        email: "alex.volk@example.com",
+        email: "test-staff@wentevent.com",
         password: "password123",
       })
       .expect(201)
       .then(({ body }) => {
-        expect(typeof body.user_id).toBe("string");
-        expect(body.email).toBe("alex.volk@example.com");
-        expect(body.first_name).toBe("Alex");
-        expect(body.last_name).toBe("Volkanovski");
-        expect(body.role).toBe("staff");
-        expect(body.username).toBe("volk145");
+        const user = body.user_data;
+        expect(user.email).toBe("test-staff@wentevent.com");
+        expect(user.first_name).toBe("Forename");
+        expect(user.last_name).toBe("Surname");
+        expect(user.role).toBe("staff");
+        expect(user.username).toBe("Staff");
       });
   });
 });
@@ -151,8 +151,8 @@ describe("/api/events", () => {
         summary: "An elegant evening of celebration and networking.",
         description:
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/winter_gala.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "winter_gala.jpg",
       })
       .expect(201)
       .then(({ body }) => {
@@ -171,8 +171,8 @@ describe("/api/events", () => {
         );
         expect(typeof event.created_at).toBe("string");
         expect(typeof event.updated_at).toBe("string");
-        expect(event.created_by).toBe("hanif.uddz@gmail.com");
-        expect(event.image_dir).toBe("images/events/winter_gala.jpg");
+        expect(event.created_by).toBe("test-staff@wentevent.com");
+        expect(event.image_dir).toBe("winter_gala.jpg");
       });
   });
   test("POST 400: Returns with error if passed event object is missing required fields", () => {
@@ -184,7 +184,7 @@ describe("/api/events", () => {
         summary: "An elegant evening of celebration and networking.",
         description:
           "The Winter Gala is a formal event featuring live music, fine dining, and opportunities to connect with professionals from various industries. Dress to impress!",
-        image_dir: "images/events/winter_gala.jpg",
+        image_dir: "winter_gala.jpg",
       })
       .expect(400)
       .then(({ body }) => {
@@ -234,8 +234,8 @@ describe("/api/events/:event_id", () => {
         );
         expect(event.created_at).toBe("2024-11-25T10:30:00.000Z");
         expect(event.updated_at).toBe("2024-11-25T10:30:00.000Z");
-        expect(event.created_by).toBe("hanif.uddz@gmail.com");
-        expect(event.image_dir).toBe("images/events/tech_conference.jpg");
+        expect(event.created_by).toBe("test-staff@wentevent.com");
+        expect(event.image_dir).toBe("tech_conference.jpg");
         expect(typeof event.is_attending).toBe("boolean");
       });
   });
@@ -270,8 +270,8 @@ describe("/api/events/:event_id", () => {
         description:
           "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
         created_at: "2024-11-25T10:30:00",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/tech_conference.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "tech_conference.jpg",
       })
       .expect(200)
       .then(({ body }) => {
@@ -290,8 +290,8 @@ describe("/api/events/:event_id", () => {
         );
         expect(event.created_at).toBe("2024-11-25T10:30:00.000Z");
         expect(typeof event.updated_at).toBe("string");
-        expect(event.created_by).toBe("hanif.uddz@gmail.com");
-        expect(event.image_dir).toBe("images/events/tech_conference.jpg");
+        expect(event.created_by).toBe("test-staff@wentevent.com");
+        expect(event.image_dir).toBe("tech_conference.jpg");
       });
   });
   test("PATCH 404: Returns error if event id is not found in database", () => {
@@ -308,8 +308,8 @@ describe("/api/events/:event_id", () => {
         description:
           "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
         created_at: "2024-11-25T10:30:00",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/tech_conference.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "tech_conference.jpg",
       })
       .expect(404)
       .then(({ body }) => {
@@ -330,8 +330,8 @@ describe("/api/events/:event_id", () => {
         description:
           "Join us for a day of insightful talks, networking, and innovation as top minds discuss the future of technology. Many professionals and tech founders from leading industries will be in attendance so don't miss out on this opportunity!",
         created_at: "2024-11-25T10:30:00",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/tech_conference.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "tech_conference.jpg",
       })
       .expect(400)
       .then(({ body }) => {
@@ -347,8 +347,8 @@ describe("/api/events/:event_id", () => {
         end_time: "2024-12-05T15:00:00",
         summary:
           "A conference showcasing and exploring the latest in technology.",
-        created_by: "hanif.uddz@gmail.com",
-        image_dir: "images/events/tech_conference.jpg",
+        created_by: "test-staff@wentevent.com",
+        image_dir: "tech_conference.jpg",
       })
       .expect(400)
       .then(({ body }) => {
