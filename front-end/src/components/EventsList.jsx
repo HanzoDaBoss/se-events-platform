@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { UserContext } from "./contexts/User";
 import { getEvents } from "../api";
 
@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Placeholder from "react-bootstrap/Placeholder";
 import EventCardWrapper from "./EventCardWrapper";
 
-export default function EventsList({ wrapper, setUpdateEventModalShow }) {
+export default function EventsList({ wrapper }) {
   const [loading, setLoading] = useState(false);
   const [eventsList, setEventsList] = useState([]);
 

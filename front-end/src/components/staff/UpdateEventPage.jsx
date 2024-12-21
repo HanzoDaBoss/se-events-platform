@@ -4,6 +4,7 @@ import UpdateEventModal from "./UpdateEventModal";
 import { getEventById } from "../../api";
 
 import Spinner from "react-bootstrap/Spinner";
+import DeleteEventModal from "./DeleteEventModal";
 
 export default function UpdateEventPage() {
   const { event_id } = useParams();
@@ -21,6 +22,7 @@ export default function UpdateEventPage() {
     image_dir: "",
   });
   const [updateEventModalShow, setUpdateEventModalShow] = useState(false);
+  const [deleteEventModalShow, setDeleteEventModalShow] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -50,13 +52,22 @@ export default function UpdateEventPage() {
       className="me-1"
     />
   ) : (
-    <UpdateEventModal
-      show={updateEventModalShow}
-      onHide={() => {
-        setUpdateEventModalShow(false);
-        navigate("/staff/events");
-      }}
-      prevEvent={prevEvent}
-    />
+    <>
+      <UpdateEventModal
+        showUpdateModal={updateEventModalShow}
+        onHideUpdateModal={() => {
+          setUpdateEventModalShow(false);
+          navigate("/staff/events");
+        }}
+        setDeleteEventModalShow={setDeleteEventModalShow}
+        prevEvent={prevEvent}
+      />
+      <DeleteEventModal
+        showDeleteModal={deleteEventModalShow}
+        onHideDeleteModal={() => {
+          setDeleteEventModalShow(false);
+        }}
+      />
+    </>
   );
 }

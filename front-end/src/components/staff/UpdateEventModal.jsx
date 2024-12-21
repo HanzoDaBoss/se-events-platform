@@ -3,14 +3,19 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { updateEventById } from "../../api";
 import moment from "moment";
+import EventForm from "./EventForm";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 import Spinner from "react-bootstrap/Spinner";
-import EventForm from "./EventForm";
 
-export default function UpdateEventModal({ show, onHide, prevEvent }) {
+export default function UpdateEventModal({
+  showUpdateModal,
+  onHideUpdateModal,
+  setDeleteEventModalShow,
+  prevEvent,
+}) {
   const supabase = useSupabaseClient();
   let navigate = useNavigate();
 
@@ -100,7 +105,7 @@ export default function UpdateEventModal({ show, onHide, prevEvent }) {
     }
   };
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={showUpdateModal} onHide={onHideUpdateModal}>
       <Modal.Header closeButton>
         <Modal.Title>Update this event</Modal.Title>
       </Modal.Header>
@@ -119,8 +124,17 @@ export default function UpdateEventModal({ show, onHide, prevEvent }) {
             <p>{updateEventFailureMsg}</p>
           </Alert>
         )}
-        <Button variant="secondary" onClick={onHide}>
+        <Button variant="secondary" onClick={onHideUpdateModal}>
           Close
+        </Button>
+        <Button
+          variant="danger"
+          className="ms-auto"
+          onClick={() => {
+            setDeleteEventModalShow(true);
+          }}
+        >
+          Delete Event
         </Button>
         <Button className="purple" onClick={submitUpdatedEvent}>
           {loading ? (
