@@ -85,13 +85,13 @@ export default function UpdateEventModal({
               .then(() => {
                 setLoading(false);
                 setUpdateEventFailure(false);
-                onHide();
+                onHideUpdateModal();
                 navigate("/staff/events");
               });
           }
           setLoading(false);
           setUpdateEventFailure(false);
-          onHide();
+          onHideUpdateModal();
           navigate("/staff/events");
         })
         .catch((error) => {

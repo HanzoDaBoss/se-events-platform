@@ -97,6 +97,12 @@ const updateEventById = (event_id, eventObj) => {
   });
 };
 
+const deleteEventById = (event_id) => {
+  return api.delete(`/events/${event_id}`).then((response) => {
+    return response;
+  });
+};
+
 export {
   postLogin,
   postRegister,
@@ -107,4 +113,5 @@ export {
   deleteUserEventByEventId,
   postEvent,
   updateEventById,
+  deleteEventById,
 };

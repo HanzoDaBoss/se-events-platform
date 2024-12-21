@@ -63,6 +63,8 @@ export default function UpdateEventPage() {
         prevEvent={prevEvent}
       />
       <DeleteEventModal
+        eventId={event_id}
+        imageFileName={prevEvent.image_dir}
         showDeleteModal={deleteEventModalShow}
         onHideDeleteModal={() => {
           setDeleteEventModalShow(false);
