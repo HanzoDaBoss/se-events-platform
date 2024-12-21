@@ -33,7 +33,7 @@ export default function GoogleCalendarModal({ show, onHide, event }) {
         provider: "google",
         options: {
           scopes: "https://www.googleapis.com/auth/calendar",
-          redirectTo: "http://localhost:5173/login-google/success",
+          redirectTo: "https://wentevent.netlify.app/login-google/success",
           skipBrowserRedirect: true,
         },
       })
