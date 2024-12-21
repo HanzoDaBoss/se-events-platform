@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import {
   deleteUserEventByEventId,
@@ -6,6 +6,7 @@ import {
   postUserEventByEventId,
 } from "../api";
 import GoogleCalendarModal from "./GoogleCalendarModal";
+import { UserContext } from "./contexts/User";
 
 import Button from "react-bootstrap/Button";
 import moment from "moment";
@@ -17,6 +18,8 @@ export default function EventPage({ event, setEvent }) {
   const { event_id } = useParams();
 
   let navigate = useNavigate();
+
+  const { setUser } = useContext(UserContext);
 
   const [loading, setLoading] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
@@ -31,6 +34,7 @@ export default function EventPage({ event, setEvent }) {
         if (response.status !== 200) {
           navigate("/login");
         } else {
+          setUser(response.data.user);
           setEvent(response.data.event);
           return response.data.event;
         }
