@@ -1,4 +1,4 @@
-const { supabaseUser, supabaseAdmin } = require("../db/supabase-connection");
+const { supabaseUser } = require("../db/supabase-connection");
 
 exports.loginUser = ({ email, password }) => {
   return supabaseUser.auth

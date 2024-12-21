@@ -25,9 +25,10 @@ exports.getEventById = (request, response, next) => {
   const { event_id } = request.params;
   authoriseUser(request, response)
     .then((userData) => {
+      const user = userData.user.user_metadata;
       selectEventById(userData, event_id)
         .then((event) => {
-          response.status(200).send({ event });
+          response.status(200).send({ user, event });
         })
         .catch(next);
     })
