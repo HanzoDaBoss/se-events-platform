@@ -37,7 +37,6 @@ export default function StaffDashboard() {
                   <h1>
                     <i className={item.icon}></i>
                   </h1>
-                  <Card.Title>X {item.url} created</Card.Title>
                 </Card.Body>
                 <Card.Footer className="text-center">
                   Manage {item.url} <i className="bi bi-arrow-right-circle"></i>

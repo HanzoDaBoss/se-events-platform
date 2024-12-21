@@ -34,7 +34,7 @@ export default function Header() {
             />
           </Navbar.Brand>
           <Navbar.Toggle
-            className="navbar-dark purple-outline purple"
+            className="navbar-dark burger-icon"
             aria-controls={`offcanvasNavbar-expand-md`}
           />
           <Navbar.Offcanvas
