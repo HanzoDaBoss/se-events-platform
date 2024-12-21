@@ -33,7 +33,7 @@ export default function EventsList({ wrapper }) {
   return (
     <Row xs={1} md={3} lg={4} className="g-4 mt-2 mx-5">
       {loading
-        ? Array.from({ length: 9 }).map((_, index) => (
+        ? Array.from({ length: 12 }).map((_, index) => (
             <Col key={index}>
               <Card className="h-100 p-0">
                 <Card.Img variant="top" src="https://placehold.co/600x400" />

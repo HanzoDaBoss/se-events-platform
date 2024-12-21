@@ -7,12 +7,13 @@ import {
 } from "../api";
 import GoogleCalendarModal from "./GoogleCalendarModal";
 import { UserContext } from "./contexts/User";
+import moment from "moment";
 
 import Button from "react-bootstrap/Button";
-import moment from "moment";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Spinner from "react-bootstrap/Spinner";
+import Placeholder from "react-bootstrap/Placeholder";
 
 export default function EventPage({ event, setEvent }) {
   const { event_id } = useParams();
@@ -64,7 +65,23 @@ export default function EventPage({ event, setEvent }) {
     });
   };
 
-  return (
+  return loading ? (
+    <Col>
+      <Card className="h-100 p-0">
+        <Card.Img variant="top" src="https://placehold.co/600x400" />
+        <Card.Body>
+          <Placeholder as={Card.Title} animation="glow">
+            <Placeholder xs={6} />
+          </Placeholder>
+          <Placeholder as={Card.Text} animation="glow">
+            <Placeholder xs={7} /> <Placeholder xs={4} /> <Placeholder xs={4} />{" "}
+            <Placeholder xs={6} /> <Placeholder xs={8} />
+          </Placeholder>
+          <Placeholder.Button variant="primary" xs={6} />
+        </Card.Body>
+      </Card>
+    </Col>
+  ) : (
     <>
       <GoogleCalendarModal
         show={modalShow}
