@@ -24,17 +24,19 @@ exports.registerUser = ({
   first_name,
   last_name,
 }) => {
-  return supabaseAdmin.auth.admin
-    .createUser({
+  return supabaseUser.auth
+    .signUp({
       email: email,
       email_confirm: true,
       password: password,
-      user_metadata: {
-        email: email,
-        username: username,
-        first_name: first_name,
-        last_name: last_name,
-        role: "user",
+      options: {
+        data: {
+          email: email,
+          username: username,
+          first_name: first_name,
+          last_name: last_name,
+          role: "user",
+        },
       },
     })
     .then(({ data, error }) => {
