@@ -11,7 +11,7 @@ module.exports = [
     created_at: "2024-11-25T10:30:00",
     updated_at: "2024-11-25T10:30:00",
     created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/tech_conference.jpg",
+    image_dir: "tech_conference.jpg",
   },
   {
     title: "Art in the Park",
@@ -25,7 +25,7 @@ module.exports = [
     created_at: "2024-11-20T14:00:00",
     updated_at: "2024-11-22T09:00:00",
     created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/art_in_the_park.jpg",
+    image_dir: "art_in_the_park.jpg",
   },
   {
     title: "Startup Pitch Night",
@@ -39,7 +39,7 @@ module.exports = [
     created_at: "2024-11-10T08:15:00",
     updated_at: "2024-11-18T15:45:00",
     created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/startup_pitch.jpg",
+    image_dir: "startup_pitch.jpg",
   },
   {
     title: "Yoga Retreat",
@@ -53,7 +53,7 @@ module.exports = [
     created_at: "2024-11-15T12:00:00",
     updated_at: "2024-11-19T17:30:00",
     created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/yoga_retreat.jpg",
+    image_dir: "yoga_retreat.jpg",
   },
   {
     title: "Book Club Meetup",
@@ -67,6 +67,6 @@ module.exports = [
     created_at: "2024-11-12T16:00:00",
     updated_at: "2024-11-20T11:00:00",
     created_by: "hanif.uddz@gmail.com",
-    image_dir: "images/events/book_club_meetup.jpg",
+    image_dir: "book_club_meetup.jpg",
   },
 ];
