@@ -62,7 +62,7 @@ export default function RegisterPage() {
     >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <h2>
-          Create a Went<span className="purple-text">Event</span> account
+          Create a <span className="purple-text">WentEvent</span> account
         </h2>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -71,7 +71,7 @@ export default function RegisterPage() {
             <Form.Label>First name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Han"
+              placeholder="Forename"
               onChange={handleFirstNameInput}
               value={firstNameInput}
             />
@@ -80,7 +80,7 @@ export default function RegisterPage() {
             <Form.Label>Last name</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Lee"
+              placeholder="Surname"
               onChange={handleLastNameInput}
               value={lastNameInput}
             />
@@ -91,7 +91,7 @@ export default function RegisterPage() {
         <Form.Label>Username</Form.Label>
         <Form.Control
           type="text"
-          placeholder="mrcooldude"
+          placeholder="user123"
           onChange={handleUsernameInput}
           value={usernameInput}
         />
@@ -100,7 +100,7 @@ export default function RegisterPage() {
         <Form.Label>Email</Form.Label>
         <Form.Control
           type="email"
-          placeholder="wentevent@example.com"
+          placeholder="example@wentevent.com"
           onChange={handleEmailInput}
           value={emailInput}
         />

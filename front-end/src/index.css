@@ -45,6 +45,14 @@ h1 {
   color: #7d0cd4 !important;
 }
 
+.purple-header-text {
+  color: #7d0cd4 !important;
+}
+
+.purple-header-text:hover {
+  color: #ca88fd !important;
+}
+
 .purple {
   background-color: #7d0cd4 !important;
   border-color: #7d0cd4 !important;

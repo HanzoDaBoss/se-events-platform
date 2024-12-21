@@ -1,10 +1,11 @@
 import Button from "react-bootstrap/Button";
+import WentEvent from "../assets/WentEvent.svg";
 
 export default function HomePage() {
   return (
     <div className="welcome-page text-center p-5">
       <header className="mb-4">
-        <h1 className="display-4 fw-bold">WentEvent</h1>
+        <img className="w-50 h-25 mb-4" src={WentEvent} />
         <p className="lead text-muted">
           An events platform to discover, join, and organize your favorite
           events effortlessly.

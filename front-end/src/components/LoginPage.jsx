@@ -48,7 +48,7 @@ export default function LoginPage() {
     >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <h2>
-          Login to Went<span className="purple-text">Event</span>
+          Login to <span className="purple-text">WentEvent</span>
         </h2>
         <Form.Label>
           Don't have an account?{" "}
