@@ -12,13 +12,15 @@ exports.postLogin = (request, response, next) => {
       const refreshToken = user.session.refresh_token;
       const user_data = user.user.user_metadata;
       response.cookie("accessToken", accessToken, {
-        secure: true,
+        secure: false,
         httpOnly: true,
+        sameSite: "None",
         maxAge: 60 * 60 * 1000, // Set the expiration time (1 hour)
       });
       response.cookie("refreshToken", refreshToken, {
-        secure: true,
+        secure: false,
         httpOnly: true,
+        sameSite: "None",
         maxAge: 7 * 24 * 60 * 60 * 1000, // Set the expiration time (7 days)
       });
       response.status(201).send({ user_data });
