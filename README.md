@@ -2,7 +2,7 @@
 
 ## An events platform to discover, join, and organise your favourite events effortlessly.
 
-Link to the live site: [WentEvent](https://wentevent.netlify.app)
+### **Link to the live site: [WentEvent](https://wentevent.netlify.app)**
 
 The WentEvent site functions as an events platform. It allows community members to view, sign up for, and add events to their own Google calendars. Furthermore, staff members have additional functionality to create and manage events.
 
