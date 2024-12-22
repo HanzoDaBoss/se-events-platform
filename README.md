@@ -1,10 +1,24 @@
-# WentEvent
+![alt text](front-end/public/images/header-logo.png)
 
-## An events platform to discover, join, and organise your favourite events effortlessly.
+## About
+
+**An events platform to discover, join, and organise your favourite events effortlessly!**
+
+The WentEvent site functions as an events platform. It allows community members to view, sign up for events. A bonus feature included is that users can add events to their own Google calendars.
+
+Furthermore, staff members have additional functionality to create and manage events.
 
 ### **Link to the live site: [WentEvent](https://wentevent.netlify.app)**
 
-The WentEvent site functions as an events platform. It allows community members to view, sign up for, and add events to their own Google calendars. Furthermore, staff members have additional functionality to create and manage events.
+### Important Info / Functionality
+
+Users must be signed in to an existing account or create an account in order to view the events and sign up for them. Once signed up, users will be prompted to "add to google calendar" to add an event to their Google calendar for them. Users can view events they have signed up for by clicking the "I'm attending" filter.
+
+Staff are able to access administrative controls in the staff dashboard page, where they can create, update and delete events.
+
+User logins are implemented via the Supabase Auth in combination with server-side authentication which stores JWTs in secure cookies.
+
+If a user attempts to access pages without the required authentication / authorisation, they will be redirected to the sign in page.
 
 ## Test Accounts
 
