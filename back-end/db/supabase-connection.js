@@ -9,8 +9,9 @@ const supabaseUser = createClient(
   process.env.ANON_KEY,
   {
     auth: {
-      autoRefreshToken: true,
+      autoRefreshToken: false,
       persistSession: false,
+      detectSessionInUrl: false,
     },
   }
 );

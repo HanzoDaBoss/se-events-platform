@@ -3,8 +3,13 @@ const { supabaseUser } = require("../db/supabase-connection");
 exports.authoriseUser = (request, response) => {
   const { accessToken } = request.cookies;
   const refresh_token = request.cookies.refreshToken;
-  console.log("Access Token:", accessToken);
-  console.log("Refresh Token:", refresh_token);
+
+  if (!refresh_token) {
+    return Promise.reject({
+      status: 401,
+      msg: "Refresh token missing or expired",
+    });
+  }
 
   return supabaseUser.auth.getUser(accessToken).then(({ data, error }) => {
     if (error) {
