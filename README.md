@@ -38,7 +38,7 @@ cd back-end
 
 ### Setup Databases
 
-To run this project locally with your own database you will need to setup, configure and deploy your own back-end server. You will also need to create a [Supabase](https://supabase.com/) project.
+To run this project locally with your own database you will need to setup, configure and host your own back-end server. You will also need to create a [Supabase](https://supabase.com/) project.
 
 Create the following files in the `back-end` directory with the API keys acquired from your Supabase project:
 
