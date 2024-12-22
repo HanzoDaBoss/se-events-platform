@@ -7,7 +7,7 @@ export default function HomePage() {
       <header className="mb-4">
         <img className="w-50 h-25 mb-4" src={WentEvent} />
         <p className="lead text-muted">
-          An events platform to discover, join, and organize your favorite
+          An events platform to discover, join, and organise your favourite
           events effortlessly.
         </p>
       </header>
