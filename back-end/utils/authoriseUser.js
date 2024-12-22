@@ -26,12 +26,12 @@ exports.authoriseUser = (request, response) => {
           const newRefreshToken = data.session.refresh_token;
           response.cookie("accessToken", newAccessToken, {
             secure: true,
-            httpOnly: true,
+            sameSite: "none",
             maxAge: 60 * 60 * 1000, // Set the expiration time (1 hour in this example)
           });
           response.cookie("refreshToken", newRefreshToken, {
             secure: true,
-            httpOnly: true,
+            sameSite: "none",
             maxAge: 7 * 24 * 60 * 60 * 1000, // Set the expiration time (7 days in this example)
           });
           return data;
