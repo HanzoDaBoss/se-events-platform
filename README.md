@@ -30,17 +30,17 @@ Password: password123
 git clone https://github.com/HanzoDaBoss/se-events-platform.git
 ```
 
-## Install Dependencies
+## Back-End
 
 ```zsh
-npm install
+cd back-end
 ```
 
-## Setup Databases
+### Setup Databases
 
-To run this project locally with your own database you will need to setup, configure and deploy your own back-end server. You will also need to create a Supabase project and acquire your API keys.
+To run this project locally with your own database you will need to setup, configure and deploy your own back-end server. You will also need to create a [Supabase](https://supabase.com/) project.
 
-The following files are required in the `back-end` directory:
+Create the following files in the `back-end` directory with the API keys acquired from your Supabase project:
 
 `.env.production`:
 
@@ -52,9 +52,17 @@ DATABASE_URL=*insert_your_database_url_here*
 
 ```zsh
 SUPABASE_URL='insert_your_supabase_url_here'
-SERVICE_ROLE_KEY='insert_your_service_role_here'
+SERVICE_ROLE_KEY='insert_your_service_role_key_here'
 ANON_KEY='insert_your_anon_key_here'
 ```
+
+### Install Dependencies
+
+```zsh
+npm install
+```
+
+### Seed Databases
 
 You can then seed the database using:
 
@@ -62,15 +70,15 @@ You can then seed the database using:
 npm run seed-prod
 ```
 
-### Setup Environment Variables
-
-create an _.env.development_ file in the root of the front-end folder:
+## Front-End
 
 ```zsh
-touch .env.development
+cd front-end
 ```
 
-Create the following variables and set the values from your deployed back-end server and supabase project:
+### Setup Environment Variables
+
+Create a `.env.development` file with the following variables and set the values from your deployed back-end server and Supabase project:
 
 ```zsh
 VITE_API_URL='insert_your_backend_api_url_here'
@@ -78,9 +86,15 @@ VITE_SUPABASE_URL='insert_your_supabase_url_here'
 VITE_SUPABASE_ANON_KEY='insert_your_supabase_anon_key_here'
 ```
 
-## Run App
+### Install Dependencies
 
-Run this script to run the app locally
+```zsh
+npm install
+```
+
+### Run App
+
+Run the app locally
 
 ```zsh
 npm run dev
