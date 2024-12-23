@@ -16,6 +16,7 @@ import StaffDashboard from "./components/staff/StaffDashboard";
 import StaffEvents from "./components/staff/StaffEvents";
 import EventsPage from "./components/EventsPage";
 import UpdateEventPage from "./components/staff/UpdateEventPage";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const [event, setEvent] = useState({});
@@ -40,6 +41,7 @@ function App() {
           path="/events/:event_id"
           element={<EventPage event={event} setEvent={setEvent} />}
         />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </>
   );

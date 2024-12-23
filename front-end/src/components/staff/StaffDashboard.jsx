@@ -9,9 +9,7 @@ import Row from "react-bootstrap/Row";
 export default function StaffDashboard() {
   const { user } = useContext(UserContext);
 
-  return !user ? (
-    <Navigate to="/login" />
-  ) : user.role === "staff" ? (
+  return user.role === "staff" ? (
     <>
       <h1>Staff Dashboard</h1>
       <Row xs={1} md={2} lg={2} className="g-4 mt-2 mx-5">
