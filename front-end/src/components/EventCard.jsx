@@ -1,6 +1,7 @@
 import moment from "moment";
 
 import Card from "react-bootstrap/Card";
+import Badge from "react-bootstrap/Badge";
 
 export default function EventCard({ event }) {
   return (
@@ -16,8 +17,9 @@ export default function EventCard({ event }) {
         <Card.Text>{event.summary}</Card.Text>
       </Card.Body>
       <Card.Footer>{moment(event.date).format("MMM Do YYYY")}</Card.Footer>
-      <Card.Footer className="text-muted">
+      <Card.Footer className="text-muted d-flex justify-content-between">
         {moment(event.start_time).format("h:mm a")}
+        {event.is_attending ? <Badge bg="success">Attending</Badge> : <></>}
       </Card.Footer>
     </Card>
   );

@@ -75,6 +75,16 @@ h1 {
   color: #ffffff !important;
 }
 
+.purple-radio {
+  background-color: transparent !important;
+  color: #7d0cd4 !important;
+  border-color: #7d0cd4 !important;
+}
+
+.purple-radio:checked {
+  background-color: #7d0cd4 !important;
+}
+
 .bg-blur {
   background: transparent;
   backdrop-filter: blur(10px);

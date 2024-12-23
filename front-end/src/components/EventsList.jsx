@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { UserContext } from "./contexts/User";
 import { getEvents } from "../api";
 
@@ -9,9 +9,12 @@ import Row from "react-bootstrap/Row";
 import Placeholder from "react-bootstrap/Placeholder";
 import EventCardWrapper from "./EventCardWrapper";
 
-export default function EventsList({ wrapper }) {
+export default function EventsList({ wrapper, filterBy }) {
   const [loading, setLoading] = useState(false);
   const [eventsList, setEventsList] = useState([]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  searchParams.get("filter");
 
   let navigate = useNavigate();
 
@@ -19,7 +22,13 @@ export default function EventsList({ wrapper }) {
 
   useEffect(() => {
     setLoading(true);
-    getEvents().then((response) => {
+    setSearchParams({});
+    if (filterBy) {
+      setSearchParams({
+        filter: filterBy,
+      });
+    }
+    getEvents(filterBy).then((response) => {
       setLoading(false);
       if (response.status !== 200) {
         navigate("/login");
@@ -28,7 +37,7 @@ export default function EventsList({ wrapper }) {
         setEventsList(response.data.events);
       }
     });
-  }, []);
+  }, [filterBy]);
 
   return (
     <Row xs={1} md={3} lg={4} className="g-4 mt-2 mx-5">
