@@ -22,7 +22,9 @@ If a user attempts to access pages without the required authentication / authori
 
 ## Test Accounts
 
-Note: New accounts can be registered but will only have user privileges and not staff access.
+Note #1: New accounts can be registered but will only have user privileges and not staff access.
+
+Note #2: If accessing the site on a mobile device, you may encounter login issues with Google Chrome due to cookie-configuration settings, it is advised to use alternative web browsers.
 
 ### Users:
 
