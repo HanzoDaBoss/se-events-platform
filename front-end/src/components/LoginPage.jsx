@@ -64,7 +64,7 @@ export default function LoginPage() {
         <Form.Label>Email</Form.Label>
         <Form.Control
           type="email"
-          placeholder="wentevent@example.com"
+          placeholder="example@wentevent.com"
           onChange={handleEmailInput}
           value={emailInput}
         />
