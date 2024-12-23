@@ -100,48 +100,40 @@ export default function GoogleCalendarModal({ show, onHide, event }) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className="px-3">
-          {/* Step 1 */}
-          <div className="mb-4">
-            <h4 className="fw-bold">1. Sign in with Google</h4>
-            <Button
-              variant="outline-primary"
-              className="w-100"
-              onClick={signInGoogle}
-            >
-              <i className="bi bi-google me-2"></i> Sign in with Google
-            </Button>
-          </div>
+        <h4 className="fw-bold mb-3">1. Sign in with Google</h4>
+        <Button
+          variant="outline-primary"
+          className="w-100 mb-5"
+          onClick={signInGoogle}
+        >
+          <i className="bi bi-google me-2"></i> Sign in with Google
+        </Button>
 
-          {/* Step 2 */}
-          <div className="mb-4">
-            <h4 className="fw-bold">2. Add event to Google Calendar</h4>
-            <Button
-              variant="primary"
-              className="w-100"
-              onClick={addEventToCalendar}
-              disabled={disableButton}
-            >
-              {loading ? (
-                <>
-                  <Spinner
-                    as="span"
-                    animation="border"
-                    size="sm"
-                    role="status"
-                    aria-hidden="true"
-                    className="me-1"
-                  />
-                  <span>{addEventText}</span>
-                </>
-              ) : (
-                <>
-                  <i className="bi bi-calendar-plus me-2"></i> {addEventText}
-                </>
-              )}
-            </Button>
-          </div>
-        </div>
+        <h4 className="fw-bold mb-3">2. Add event to Google Calendar</h4>
+        <Button
+          variant="primary"
+          className="w-100"
+          onClick={addEventToCalendar}
+          disabled={disableButton}
+        >
+          {loading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+                className="me-1"
+              />
+              <span>{addEventText}</span>
+            </>
+          ) : (
+            <>
+              <i className="bi bi-calendar-plus me-2"></i> {addEventText}
+            </>
+          )}
+        </Button>
       </Modal.Body>
       <Modal.Footer className="border-0">
         {!addToCalendarFailure ? (

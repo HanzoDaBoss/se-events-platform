@@ -2,17 +2,9 @@ import Button from "react-bootstrap/Button";
 
 export default function RegisterSuccessPage() {
   return (
-    <article
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        textAlign: "center",
-      }}
-    >
+    <article className="text-center">
       <h2>
-        You have created a Went<span className="purple-text">Event</span>{" "}
+        You have created a <span className="purple-text">WentEvent</span>{" "}
         account!
       </h2>
       <Button className="btn purple-outline btn-lg mt-3" href="/login">

@@ -19,8 +19,9 @@ export default function Header() {
       navigate("/login");
     });
   };
+  const userValues = Object.values(user);
 
-  return !user ? (
+  return !userValues.some(Boolean) ? (
     <></>
   ) : (
     <>
@@ -80,8 +81,11 @@ export default function Header() {
                 ) : (
                   <></>
                 )}
-                <Nav.Link onClick={handleLogoutUser}>
-                  <span className="purple-header-text">Log out</span>
+                <Nav.Link
+                  onClick={handleLogoutUser}
+                  className="purple-header-text"
+                >
+                  Log out
                 </Nav.Link>
               </Nav>
             </Offcanvas.Body>

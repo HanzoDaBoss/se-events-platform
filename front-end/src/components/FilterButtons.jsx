@@ -1,8 +1,6 @@
-import { useState } from "react";
-
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import Container from "react-bootstrap/Container";
 
 export default function FilterButtons({ filterValue, setFilterValue }) {
   const radios = [
@@ -11,7 +9,7 @@ export default function FilterButtons({ filterValue, setFilterValue }) {
   ];
 
   return (
-    <div className="text-center mt-4">
+    <Container className="text-center mt-4">
       {radios.map((radio, id) => (
         <ButtonGroup className="me-3" key={id}>
           <ToggleButton
@@ -28,6 +26,6 @@ export default function FilterButtons({ filterValue, setFilterValue }) {
           </ToggleButton>
         </ButtonGroup>
       ))}
-    </div>
+    </Container>
   );
 }

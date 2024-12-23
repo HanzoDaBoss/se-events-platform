@@ -32,9 +32,7 @@ export default function StaffDashboard() {
               <Card className="h-100 p-0 zoom" bg={item.color}>
                 <Card.Body>
                   <Card.Title>{item.name}</Card.Title>
-                  <h1>
-                    <i className={item.icon}></i>
-                  </h1>
+                  <i className={item.icon}></i>
                 </Card.Body>
                 <Card.Footer className="text-center">
                   Manage {item.url} <i className="bi bi-arrow-right-circle"></i>
