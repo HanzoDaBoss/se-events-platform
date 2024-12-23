@@ -78,7 +78,7 @@ export default function LoginPage() {
           onChange={handlePasswordInput}
           value={passwordInput}
         />
-        <Form.Label className="purple-text">Forgot Password?</Form.Label>
+        {/* <Form.Label className="purple-text">Forgot Password?</Form.Label> */}
       </Form.Group>
       {!loginFailure ? (
         <></>
