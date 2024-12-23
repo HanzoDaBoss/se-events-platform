@@ -16,8 +16,10 @@ export default function EventCard({ event }) {
         <Card.Title>{event.title}</Card.Title>
         <Card.Text>{event.summary}</Card.Text>
       </Card.Body>
-      <Card.Footer>{moment(event.date).format("MMM Do YYYY")}</Card.Footer>
-      <Card.Footer className="text-muted d-flex justify-content-between">
+      <Card.Footer className="border-0">
+        {moment(event.date).format("MMM Do YYYY")}
+      </Card.Footer>
+      <Card.Footer className="text-muted d-flex mb-2 border-0 justify-content-between">
         {moment(event.start_time).format("h:mm a")}
         {event.is_attending ? <Badge bg="success">Attending</Badge> : <></>}
       </Card.Footer>

@@ -104,9 +104,9 @@ export default function LoginPage() {
           "Login"
         )}
       </Button>
-      <Button variant="outline-primary" className="w-100 mt-3">
+      {/* <Button variant="outline-primary" className="w-100 mt-3">
         <i className="bi bi-google me-2"></i> Sign in with Google
-      </Button>
+      </Button> */}
     </Form>
   );
 }
